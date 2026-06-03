@@ -1,0 +1,94 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode mergehead = null, mergetail = null;
+        if (list1 == null && list2 == null)
+            return list1;
+        else if (list1 != null && list2 == null)
+            return list1;
+        else if (list1 == null && list2 != null)
+            return list2;
+        else {
+            while (list1 != null && list2 != null) {
+                ListNode temp = null;
+
+                if (list1.val == list2.val) {
+                    ListNode temp1 = createNode(list1.val);
+                    ListNode temp2 = createNode(list1.val);
+
+                    if (mergehead == null) {
+                        mergehead = mergetail = temp1;
+                        mergetail.next = temp2;
+                        mergetail = temp2;
+                    } else {
+                        mergetail.next = temp1;
+                        mergetail = temp1;
+                        mergetail.next = temp2;
+                        mergetail = temp2;
+                    }
+                    
+                    list1 = list1.next;
+                    list2 = list2.next;
+                } else {
+                    if (list1.val < list2.val) {
+                        temp = createNode(list1.val);
+                        list1 = list1.next;
+                    } else {
+                        temp = createNode(list2.val);
+                        list2 = list2.next;
+                    }
+                    if (mergehead == null) {
+                        mergehead = mergetail = temp;
+                    } else {
+                        mergetail.next = temp;
+                        mergetail = temp;
+                    }
+                }
+            }
+            while (list1 != null) {
+                ListNode temp = new ListNode();
+                temp.val = list1.val;
+                temp.next = null;
+                if (mergehead == null) {
+                    mergehead = mergetail = temp;
+                } else {
+                    mergetail.next = temp;
+                    mergetail = temp;
+                }
+                list1 = list1.next;
+            }
+
+            while (list2 != null) {
+                ListNode temp = new ListNode();
+                temp.val = list2.val;
+                temp.next = null;
+                if (mergehead == null) {
+                    mergehead = temp;
+                    mergetail = temp;
+                } else {
+                    mergetail.next = temp;
+                    mergetail = temp;
+                }
+                list2 = list2.next;
+            }
+        }
+        return mergehead;
+    }
+
+    private ListNode createNode(int val) {
+        ListNode temp = new ListNode();
+        temp.val = val;
+        temp.next = null;
+
+        return temp;
+    }
+}
