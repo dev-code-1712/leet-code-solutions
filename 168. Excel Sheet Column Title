@@ -1,0 +1,25 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        StringBuilder str = new StringBuilder();
+        int cell = 0;
+        while(columnNumber > 26) {
+            cell = columnNumber % 26;
+            //System.out.println(cell);
+            if(cell == 0) {
+                cell = 26;
+                columnNumber --;
+            }
+                
+            char c = (char)(cell + 64);
+            str.append(c);
+
+            columnNumber = columnNumber / 26;
+        }
+        //System.out.println("*** "+ columnNumber);
+
+        char c = (char)(columnNumber + 64);
+        str.append(c);
+
+        return str.reverse().toString();
+    }
+}
