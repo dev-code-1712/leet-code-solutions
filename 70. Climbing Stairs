@@ -1,0 +1,16 @@
+class Solution {
+    Map<Integer, Integer> map = new HashMap<>();
+    public int climbStairs(int n) {
+        if(n<=1)
+            return 1;
+        else {
+            if(map.containsKey(n)) 
+                return map.get(n);
+        
+            int x = climbStairs(n-1);
+            int y = climbStairs(n-2);
+            map.put(n, x+y);
+        }
+        return map.get(n);
+    }
+}
