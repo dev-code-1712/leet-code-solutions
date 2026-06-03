@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isHappy(int n) {
+        int result = n;
+        Set<Integer> set = new HashSet<>();
+        while(set.add(result)) {
+            //System.out.println(set);
+            result = squares(n);
+            //System.out.println(result);
+
+            if(result == 1)
+                return true;
+            n = result;
+        }
+        return false;
+    }
+
+    private int squares(int num) {
+        int sum = 0;
+        while(num > 0) {
+            int val = num%10;
+            sum = sum + val*val;
+            num = num / 10;
+        }
+        return sum;
+    }
+}
