@@ -1,0 +1,5 @@
+# Write your MySQL query statement below
+select w2.id
+from Weather w, Weather w2
+where ADDDATE(w.recordDate, 1) = w2.recordDate
+and w.temperature < w2.temperature
