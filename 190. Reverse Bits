@@ -1,0 +1,33 @@
+class Solution {
+    public int reverseBits(int n) {
+        StringBuilder str = new StringBuilder();
+        
+        while(n > 0){
+            str.append(n%2);
+            n = n/2;
+        }
+        //System.out.println(str.toString());
+        
+        while(str.length() <=31) {
+            str.append("0");
+        }
+
+        int reverse = 0, weight = 1;
+        boolean flag = true;
+        char[] bits = str.reverse().toString().toCharArray();
+        for(char c : bits) {
+            if(flag) {
+                flag = false;
+                reverse = reverse + (c-48);
+            } else {
+                weight = weight * 2;
+                reverse = reverse + (c-48) * weight;
+            }
+        }
+
+        //System.out.println(reverse);
+
+        return reverse;
+        
+    }
+}

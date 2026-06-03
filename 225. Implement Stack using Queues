@@ -1,0 +1,51 @@
+class MyStack {
+
+    List<Integer> queue = null;
+    int topVal = -1;
+    public MyStack() {
+        queue = new ArrayList<>();
+    }
+    
+    public void push(int x) {
+        queue.add(x); 
+        topVal = x;
+    }
+    
+    public int pop() {
+        List<Integer> temp = new ArrayList<>();
+        int curtop = topVal;
+        if(queue.size() == 1)
+            queue = new ArrayList<>();
+        else 
+        {
+            int len = queue.size();
+            for(int i=0; i<len; i++) {
+                if(i == len-1) {
+                    topVal = queue.get(i-1);
+                    //System.out.println("After pop top value: "+topVal +" "+i);
+                    queue = temp;
+                } else {
+                    temp.add(queue.get(i));
+                }
+            }
+        }
+        return curtop;
+    }
+    
+    public int top() {
+        return topVal;
+    }
+    
+    public boolean empty() {
+        return queue == null || queue.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
