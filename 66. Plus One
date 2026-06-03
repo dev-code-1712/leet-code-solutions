@@ -1,0 +1,24 @@
+import java.math.BigInteger;
+class Solution {
+    public int[] plusOne(int[] digits) {
+        if(digits[digits.length - 1] < 9) {
+			digits[digits.length - 1] = digits[digits.length - 1] + 1;
+			return digits;
+		}
+		
+		StringBuilder tempstr = new StringBuilder();
+		for(int i:digits)
+			tempstr.append(i);
+		
+		BigInteger number = new BigInteger(tempstr.toString());
+		number = number.add(BigInteger.ONE);
+		
+		String temp = number.toString(10);
+		int[] finaldigits = new int[temp.length()];
+		int i=0;
+		for(char c:temp.toCharArray()) 
+			finaldigits[i++] = Integer.valueOf(c)-48;
+		
+		return finaldigits;
+    }
+}

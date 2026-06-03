@@ -1,0 +1,50 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        int len = a.length();
+        int len2 = b.length();
+
+        int carry = 0;
+        StringBuilder str = new StringBuilder();
+        while(len > 0 && len2 >0) {
+            int digit = a.charAt(--len) - 48;
+            int digit2 = b.charAt(--len2) - 48;
+            int sum = carry + digit + digit2;
+            if(sum >=2) {
+                sum = sum%2;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            str.append(String.valueOf(sum));
+        }
+        while(len > 0){
+            int digit = a.charAt(--len) - 48;
+            int sum = carry + digit;
+            if(sum >=2) {
+                sum = sum%2;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            str.append(String.valueOf(sum));
+        }
+
+        while(len2 > 0){
+            int digit = b.charAt(--len2) - 48;
+            int sum = carry + digit;
+            if(sum >=2) {
+                sum = sum%2;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            str.append(String.valueOf(sum));
+        }
+        if(carry == 1)
+            str.append(String.valueOf(carry));
+        str.reverse();
+
+        //System.out.println(str);
+        return str.toString();
+    }
+}

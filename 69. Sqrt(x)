@@ -1,0 +1,8 @@
+class Solution {
+    public int mySqrt(int x) {
+        long cur = 1;
+        while(cur * cur <= x) 
+            cur++;
+        return Long.valueOf(cur-1).intValue();
+    }
+}
