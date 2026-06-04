@@ -1,0 +1,55 @@
+class Solution {
+    Map<Integer, Integer> makeMap(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i:nums) {
+            if(map.containsKey(i)) 
+                map.put(i, map.get(i) + 1);
+            else
+                map.put(i, 1);
+        }
+
+        return map;
+    }
+
+    int[] convertArray(Map<Integer, Integer> map) {
+        
+        List<Integer> list = new ArrayList<>();
+        for(int val:map.keySet()) {
+            for(int i=0; i<map.get(val); i++)
+                list.add(val);
+        }
+
+        int[] nums = new int[list.size()];
+        int pos = 0;
+        for(int num:list)
+            nums[pos++] = num;
+        
+        return nums;
+    }
+
+    Map<Integer, Integer> intersectMap(Map<Integer, Integer> map1, 
+                                        Map<Integer, Integer> map2) {
+        Map<Integer, Integer> result = new HashMap();
+        for(int num : map1.keySet()) {
+            if(map2.containsKey(num)) {
+                if(map1.get(num) < map2.get(num))
+                    result.put(num, map1.get(num));
+                else
+                    result.put(num, map2.get(num));
+            }
+        }
+        return result;
+    }
+
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map1 = makeMap(nums1);
+        Map<Integer, Integer> map2 = makeMap(nums2);
+        Map<Integer, Integer> result = null;
+
+        result = intersectMap(map1, map2);
+        
+        //System.out.println(result);
+
+        return convertArray(result);
+    }
+}
