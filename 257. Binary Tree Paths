@@ -1,0 +1,54 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        String path = String.valueOf(root.val);;
+        List<String> paths = new ArrayList<>();
+
+        if(root.left == null && root.right == null) {
+            paths.add(path);
+        } else if(root.left == null && root.right != null) {
+            findPaths(root.right, path, paths);
+        } else if(root.left != null && root.right == null) {
+            findPaths(root.left, path, paths);
+        } else if(root.left != null && root.right != null) {
+            findPaths(root.left, path, paths);
+            findPaths(root.right, path, paths);
+        }
+
+        //System.out.println(paths);
+        return paths;
+    }
+
+    private void findPaths(TreeNode tree, String path, List<String> paths) {
+        
+        if(tree.left == null && tree.right == null) {
+            path = path+"->"+tree.val;
+            paths.add(path);
+            //System.out.println("**** "+ paths);
+            return;
+        } 
+        
+        path = path+"->"+tree.val;
+        //System.out.println(tree.val +", "+path+", "+paths);
+
+        if(tree.left != null)
+            findPaths(tree.left, path, paths);
+        
+        if(tree.right != null)
+            findPaths(tree.right, path, paths); 
+    }
+}
