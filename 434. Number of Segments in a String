@@ -1,0 +1,19 @@
+class Solution {
+    public int countSegments(String s) {
+        char[] chars = s.toCharArray();
+        boolean start = false;
+        int count = 0, i=0;
+        while(i<chars.length) {
+            if(chars[i]  != ' ' && !start) {
+                start = true;
+            } else if(chars[i] == ' ' && start) {
+                count ++;
+                start = false;
+            }
+            i++;
+        }
+        if(i == chars.length && start)
+            count ++;
+        return count;
+    }
+}

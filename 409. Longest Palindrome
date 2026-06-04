@@ -1,0 +1,33 @@
+class Solution {
+    public int longestPalindrome(String s) {
+        Map<Character, Integer> map = new HashMap();
+        for(char c : s.toCharArray()) {
+            if(map.containsKey(c)) 
+                map.put(c, map.get(c)+1);
+            else
+                map.put(c, 1);
+        }
+
+        //System.out.println(map);
+        List<Integer> list = new ArrayList<>();
+        int sum = 0;
+        for(char c : map.keySet()) {
+            int count = map.get(c);
+            if(count % 2 == 0) {
+                sum += count;
+            } else {
+                list.add(count);
+            }
+        }
+        if(list.size() > 0)
+        {
+            Collections.sort(list);
+            for(int i=0; i<list.size() - 1; i++)
+                sum += list.get(i) - 1;
+
+            sum += list.get(list.size()-1);
+        }
+        
+        return sum;
+    }
+}
