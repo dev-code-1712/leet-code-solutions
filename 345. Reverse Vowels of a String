@@ -1,0 +1,25 @@
+class Solution {
+    public String reverseVowels(String s) {
+        StringBuilder vowels = new StringBuilder();
+        char[] arr = s.toCharArray();
+
+        for(int i=0; i<arr.length; i++) {
+            char c = arr[i];
+            if(c == 'a' || c =='e' || c =='i' || c =='o' || c =='u' 
+                    || c =='A' || c =='E' || c =='I' || c =='O' || c =='U')
+                vowels.append(c);
+        }
+        String rev = vowels.reverse().toString();
+        //System.out.println(rev);
+        int j=0;
+        for(int i=0; i<arr.length; i++) {
+            char c = arr[i];
+            if(c == 'a' || c =='e' || c =='i' || c =='o' || c =='u' 
+                    || c =='A' || c =='E' || c =='I' || c =='O' || c =='U')
+                arr[i] = rev.charAt(j++);
+        }
+        //System.out.println(String.valueOf(arr));
+        return String.valueOf(arr);
+        
+    }
+}

@@ -1,0 +1,16 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        long i=1;
+        long sq = 1;
+        do {
+            sq = i*i;
+            i++;
+            //System.out.println(sq);
+        } while(sq < num);
+        
+        if(sq == num)
+            return true;
+        else
+            return false;
+    }
+}

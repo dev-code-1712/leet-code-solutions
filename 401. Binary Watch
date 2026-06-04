@@ -1,0 +1,74 @@
+class Solution {
+
+    int findbits(int val) {
+        int count = 0;
+        while(val > 0) {
+            if(val % 2 == 1)
+                count++;
+            val >>= 1;
+        }
+        return count;
+    }
+
+    Map<Integer, List<String>> makeMap(boolean isMin, int max) {
+        Map<Integer, List<String>> map = new HashMap();
+        for(int i=0; i<=max; i++) {
+            int bits = findbits(i);
+            String save = "";
+            if(isMin) {
+                if(i == 0)
+                    save = "00";
+                else if(i < 10)
+                    save = "0"+i;
+                else
+                    save = String.valueOf(i);
+            } else {
+                save = String.valueOf(i);
+            }
+
+            if(map.containsKey(bits)) {
+                map.get(bits).add(save);
+            } else {
+                List<String> list = new ArrayList();
+                list.add(save);
+                map.put(bits, list);
+            }
+        }
+
+        return map;
+    }
+
+
+    public List<String> readBinaryWatch(int turnedOn) {
+        
+        List<String> timelist = new ArrayList();
+        if(turnedOn > 8)
+            return timelist;
+
+        Map<Integer, List<String>> hourmap = makeMap(false, 11);
+        Map<Integer, List<String>> minmap = makeMap(true, 59);
+
+        // System.out.println(hourmap);
+        // System.out.println(minmap);
+        // System.out.println("***");
+
+        for(int i=0; i<=turnedOn; i++) {
+
+            int hourbits = i;
+            int minbits = turnedOn - i;
+
+            if(hourmap.get(hourbits) == null || minmap.get(minbits) == null)
+                continue;
+
+            //System.out.println( hourmap.get(hourbits)+" - "+minmap.get(minbits));
+
+            for(String hour : hourmap.get(hourbits)) {
+                for (String min : minmap.get(minbits)) {
+                    timelist.add(hour+":"+min);
+                }
+            }
+        }
+        //System.out.println(timelist);
+        return timelist;
+    }
+}

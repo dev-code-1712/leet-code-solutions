@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isSubsequence(String sou, String tar) {
+        if(sou.length() == 0)
+            return true;
+
+        if(sou.length() > tar.length())
+            return false;
+        
+        char[] seq = sou.toCharArray();
+        int i=0;
+        for(i=0; i<seq.length; i++) {
+            int index = tar.indexOf(seq[i]);
+            if(index == -1)
+                return false;
+            tar = tar.substring(index+1);
+            //System.out.println(tar);
+        }
+        if(seq.length == i)
+            return true;
+        else
+            return false;
+    }
+}
