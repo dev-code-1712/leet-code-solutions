@@ -1,0 +1,27 @@
+class Solution {
+    Set<Integer> makeSet(int[] nums) {
+        Set<Integer> set = new HashSet();
+        for(int i:nums)
+            set.add(i);
+
+        return set;
+    }
+
+    int[] convertArray(Set<Integer> set) {
+        int[] nums = new int[set.size()];
+        int i = 0;
+        for(int val:set) {
+            nums[i++] = val;
+        }
+        return nums;
+    }
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set1 = makeSet(nums1);
+        Set<Integer> set2 = makeSet(nums2);
+
+        set1.retainAll(set2);
+        System.out.println(set1);
+
+        return convertArray(set1);
+    }
+}
