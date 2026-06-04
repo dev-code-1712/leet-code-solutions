@@ -1,0 +1,36 @@
+class Solution {
+
+    Map<Character, Integer> makeMap(String str) {
+        Map<Character, Integer> map = new HashMap<>();
+        for(char c : str.toCharArray()) {
+            if(map.containsKey(c)) 
+                map.put(c, map.get(c) + 1);
+            else
+                map.put(c, 1);
+        }
+        return map;
+    }
+
+    public char findTheDifference(String s, String t) {
+        Map<Character, Integer> map1 = makeMap(s);
+        Map<Character, Integer> map2 = makeMap(t);
+        //System.out.println(map1);
+        //System.out.println(map2);
+
+        for(char c : map1.keySet()) {
+            if(map2.containsKey(c)) {
+                map2.put(c, map2.get(c) - map1.get(c));
+            }
+        }
+
+        //System.out.println(map2);
+        for(char c : map2.keySet()) {
+            if(map2.get(c) == 1) {
+                return c;
+            }
+        }
+
+        return 'a';
+
+    }
+}
