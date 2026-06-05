@@ -1,0 +1,58 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1)
+			return s;
+         List<String> strs = new ArrayList<String>();
+
+        int count = 0, row = 0;
+        boolean full = true;
+        for(char c:s.toCharArray()) {
+            
+        	if(full) {
+        		if(strs.size() < numRows) {
+    				strs.add(String.valueOf(c));
+    			} else {
+    				strs.set(row, strs.get(row) + String.valueOf(c));
+    			}
+    			
+    			//System.out.println(strs);
+        		row ++;
+        		
+        	} else {
+
+        		for(int j=0; j<numRows; j++) {
+        			
+        			if(j == count)
+                        strs.set(j, strs.get(j) + String.valueOf(c));
+                    else
+                        strs.set(j, strs.get(j)+" ");
+            		
+            		//System.out.println(strs);
+        		}
+        		
+    			count --;
+        		
+        	}
+
+        	if(full && row == numRows) {
+        		count = numRows-2;
+        		if(count > 0)	
+        			full = false;
+        		row = 0;
+        		
+        	} else if(!full && count <= 0) {
+        		full = true;
+        	}
+
+        }
+        String result = "";
+        for(String str : strs) {
+        	for(char c:str.toCharArray()) {
+        		if(c != ' ')
+        			result += String.valueOf(c);
+        	}
+        }
+        //System.out.println(result);
+        return result;
+    }
+}
