@@ -1,0 +1,90 @@
+class Solution {
+    public String intToRoman(int num) {
+        String result = "";
+        int times = 0;
+        while(num > 0) {
+            if(num >= 1000) {
+                times = num / 1000;
+                while(times > 0) {
+                	result += "M";
+                	times --;
+                }
+                num = num % 1000;
+                
+            } else if(num >= 100) {
+                times = num / 100;
+                if(times == 4) {
+                    result += "CD";
+                } else if(times == 9) {
+                    result += "CM";
+                } else {
+                    while(times > 0) {
+                        if(times >= 5 && times <= 8) {
+                            result += "D";
+                            times = times - 5;
+                        }
+                        if(times >= 1 && times <= 3) {
+                            while(times > 0) {
+                                result += "C";
+                                times --;
+                            }
+
+                        }
+                    }
+                }
+                num = num % 100;
+            
+            } else if(num >= 10) {
+                times = num / 10;
+                if(times == 4) {
+                    result += "XL";
+                } else if(times == 9) {
+                    result += "XC";
+                } else {
+                    while(times > 0) {
+                        if(times >= 5 && times <= 8) {
+                            result += "L";
+                            times = times - 5;
+                        }
+                        if(times >= 1 && times <= 3) {
+                            while(times > 0) {
+                                result += "X";
+                                times --;
+                            }
+
+                        }
+                    }
+                }
+                num = num % 10;
+            
+            } else if(num >= 1) {
+                
+                if(num == 4) {
+                    result += "IV";
+                    num -= 4;
+                } else if(num == 9) {
+                    result += "IX";
+                    num -= 9;
+                } else {
+                    while(num > 0) {
+                        if(num >= 5 && num <= 8) {
+                            result += "V";
+                            num = num - 5;
+                        }
+                        if(num >= 1 && num <= 3) {
+                            while(num > 0) {
+                                result += "I";
+                                num --;
+                            }
+
+                        }
+                    }
+                }
+ 
+            }
+
+            //System.out.println("result: "+result+", num: "+num);
+        }
+        return result;
+    }
+}
