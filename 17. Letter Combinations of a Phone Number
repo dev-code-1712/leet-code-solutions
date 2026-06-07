@@ -1,0 +1,40 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        Map<Integer, List<String>> map = new HashMap();
+        map.put(2, Arrays.asList(new String[] {"a", "b","c"}));
+        map.put(3, Arrays.asList(new String[] {"d", "e","f"}));
+        map.put(4, Arrays.asList(new String[] {"g", "h","i"}));
+        map.put(5, Arrays.asList(new String[] {"j", "k","l"}));
+        map.put(6, Arrays.asList(new String[] {"m", "n","o"}));
+        map.put(7, Arrays.asList(new String[] {"p", "q","r","s"}));
+        map.put(8, Arrays.asList(new String[] {"t", "u","v"}));
+        map.put(9, Arrays.asList(new String[] {"w", "x","y","z"}));
+
+        //System.out.println(map);
+
+        if(digits.length() == 1)
+            return map.get(Integer.valueOf(digits));
+
+        String first = digits.substring(0,1);
+        for(int i=1; i<digits.length(); i++) {
+            Integer key = null;
+            String second = digits.substring(i, i+1);
+            for(String str : map.get(Integer.valueOf(first))) {
+                for(String str2 : map.get(Integer.valueOf(second))) {
+                    key = Integer.valueOf(first + second);
+                    if(map.containsKey(key)) {
+                        map.get(key).add(str + str2);
+                    } else {
+                        List<String> list = new ArrayList();
+                        list.add(str + str2);
+                        map.put(key, list);
+                    }
+                }
+            }
+            first = ""+key;
+        }
+        
+        //System.out.println(map);
+        return map.get(Integer.valueOf(digits));
+    }
+}
