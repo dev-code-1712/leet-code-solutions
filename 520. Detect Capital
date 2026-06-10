@@ -1,0 +1,29 @@
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        boolean result = true;
+        if(word.length() == 1)
+            return result;
+        
+        char[] vals = word.toCharArray();
+        if(vals[0] >= 'a' && vals[0] <= 'z') {
+            for(int i=1; i<vals.length; i++) {
+                if(vals[i] >='A' && vals[i] <= 'Z')
+                    return false;
+            }
+        } else if(vals[0] >= 'A' && vals[0] <='Z') {
+            if(vals[1] >= 'A' && vals[1] <='Z') {
+                for(int i=2; i<vals.length; i++) {
+                    if(vals[i] >='a' && vals[i] <= 'z')
+                        return false;
+                }
+            } else {
+                for(int i=2; i<vals.length; i++) {
+                    if(vals[i] >='A' && vals[i] <= 'Z')
+                        return false;
+                }
+            }
+        }
+
+        return result;
+    }
+}

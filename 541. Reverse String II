@@ -1,0 +1,17 @@
+class Solution {
+    public String reverseStr(String s, int k) {
+        String result = "";
+        int i=0;
+        while(i<s.length()) {
+            int max = (i+k) <= s.length() ? i+k : s.length();
+
+            if(i % (2*k) == 0) 
+                result += new StringBuilder(s.substring(i, max)).reverse();
+            else
+                result += s.substring(i, max);
+             i+= k;
+        }
+
+        return result;
+    }
+}
