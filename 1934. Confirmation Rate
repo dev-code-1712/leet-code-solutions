@@ -1,0 +1,18 @@
+select a.user_id, round(COALESCE(b.count / a.count, 0), 2) as confirmation_rate 
+from (
+    select a.user_id, count(*) as count
+    from signups a
+        left join confirmations b
+            on a.user_id = b.user_id
+    group by a.user_id
+) 
+a left join 
+(
+    select a.user_id, count(*) as count
+    from signups a
+        left join confirmations b
+            on a.user_id = b.user_id
+    where b.action = 'confirmed'
+    group by a.user_id
+) b
+    on a.user_id = b.user_id
