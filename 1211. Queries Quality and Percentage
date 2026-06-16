@@ -1,0 +1,39 @@
+# Write your MySQL query statement below
+
+select final.query_name, 
+        sum(final.quality) as quality, 
+        sum(final.poor_query_percentage) as poor_query_percentage
+from (
+    (select a.query_name, 
+        round(a.quality / b.total, 2) as quality,
+        0 as poor_query_percentage
+    from (
+        select query_name, sum(rating/position) as quality , 
+                case when rating < 3 then rating else 0 end as poor_query_percentage
+        from queries
+        group by query_name
+    ) a,
+    (
+        select query_name, count(*) total
+        from queries
+        group by query_name
+    ) b
+    where a.query_name = b.query_name)
+    union
+    (select a.query_name, 
+        0 as quality,
+        round( (a.total / b.total)*100, 2) as poor_query_percentage
+    from (
+        select query_name, count(*) as total
+        from queries
+        where rating < 3
+        group by query_name
+    ) a,
+    (
+        select query_name, count(*) total
+        from queries
+        group by query_name
+    ) b
+    where a.query_name = b.query_name)
+) final
+group by final.query_name
