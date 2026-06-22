@@ -1,0 +1,44 @@
+class Solution {
+    boolean isPrefixDivior(String str, String prefix) {
+        int sl = str.length();
+        int pl = prefix.length();
+
+        for(int i=0; i<sl; i+= pl) {
+            String sub = str.substring(i, i+pl < sl ? i+pl : sl);
+            if(!sub.equals(prefix))
+                return false;
+        }
+
+        return true;
+    }
+
+    public String gcdOfStrings(String str1, String str2) {
+        int min = 0;
+        String s = null, s2 = null;
+        if(str1.length() < str2.length()) {
+            min = str1.length();
+            s = str1;
+            s2 = str2;
+        } else {
+            min = str2.length();
+            s = str2;
+            s2 = str1;
+        }
+
+        String gcd = "";
+        for(int i=0; i<min; i++) {
+            String prefix = s.substring(0, i+1);
+            boolean divisor = isPrefixDivior(s, prefix);
+            if(!divisor)
+                continue;
+            
+            boolean divisor2 = isPrefixDivior(s2, prefix);
+            if(!divisor2)
+                continue;
+            
+            gcd = prefix;
+        }
+
+        return gcd;
+    }
+}

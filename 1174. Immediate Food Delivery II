@@ -1,0 +1,15 @@
+select round ((a.total / b.total) *100, 2) as immediate_percentage 
+from
+(
+    select count(*) as total
+    from delivery d,
+    (
+        select customer_id, min(order_date) as od
+        from delivery
+        group by customer_id
+    ) d2
+    where d.customer_id = d2.customer_id 
+    and d.order_date = d2.od
+    and d.order_date = d.customer_pref_delivery_date 
+) a,
+(select count(distinct customer_id) as total from delivery) b
