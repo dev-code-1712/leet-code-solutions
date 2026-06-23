@@ -1,0 +1,23 @@
+# Write your MySQL query statement below
+
+(
+    select distinct customer_id
+        from customer
+)
+EXCEPT
+(
+    select customer_id
+    from (
+        (select a.customer_id, b.product_key
+        from
+            (select distinct customer_id
+            from customer) a 
+                cross join 
+            (select product_key from product) b )
+        EXCEPT
+        (
+            select customer_id, product_key
+            from customer c
+        )
+    ) aa
+)
