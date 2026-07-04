@@ -1,0 +1,36 @@
+# Write your MySQL query statement below
+select p.product_id,
+    (
+        case 
+            when p.change_date <= '2019-08-16' then p.new_price
+            when p.change_date > '2019-08-16' then 10
+        end
+    ) as price
+from products p,
+(
+    select p.product_id, min(p.max_date) as new_date
+    from (
+        (
+            select p.product_id, max(p.change_date) as max_date
+            from products p
+            where p.change_date <= '2019-08-16'
+            group by p.product_id
+        )
+        union 
+        (
+            select p.product_id, max(p.change_date) as max_date
+            from products p,
+            (
+                select p.product_id as product_id, max(p.change_date) as max_date
+                from products p
+                where p.change_date > '2019-08-16'
+                group by p.product_id
+            ) p2
+            where p.change_date > '2019-08-16'
+            group by p.product_id
+        )
+    ) p
+    group by p.product_id
+) p2
+where p.product_id = p2.product_id
+and p.change_date = p2.new_date

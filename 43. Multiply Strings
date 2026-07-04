@@ -1,0 +1,57 @@
+class Solution {
+    public String multiply(String num1, String num2) {
+        List<List<Integer>> list = new ArrayList();
+        int maxlen = 0, count = 0;
+        
+        char[] nums2 = num2.toCharArray();
+        
+        for(int i=nums2.length-1; i>=0; i--) {
+        	
+            int x = (int)(nums2[i] - 48);
+            int sum = 0;
+            List<Integer> temp = new ArrayList();
+            if(count > 0) {
+                for(int ii=0; ii<count; ii++) {
+                    temp.add(0);
+                }
+            }
+            
+            char[] nums1 = num1.toCharArray();
+            
+            for(int j=nums1.length-1; j>=0; j--) {
+                int y = (int)(nums1[j] - 48);
+                sum += x * y;
+
+                temp.add(sum % 10);
+                sum = sum >= 10 ? sum/10 : 0;
+            }
+            if(sum > 0) {
+                temp.add(sum);
+                sum = 0;
+            }
+            if(maxlen < temp.size()) 
+                maxlen = temp.size();
+            list.add(temp);
+            count ++;
+            //System.out.println(temp);
+        }
+
+        String total = "";
+        int sum = 0;
+         for(int i=0; i<maxlen; i++) {
+             for(int j=0; j<list.size(); j++) {
+            	 if(list.get(j).size() > i)
+            		 sum += list.get(j).get(i);
+             }
+             total = (sum % 10) + total;
+             sum = sum / 10;
+         }
+         if(sum > 0) {
+        	 total = sum+total;
+         }
+        //System.out.println(total);
+        if(total.startsWith("0"))
+        	total = "0";
+        return total;
+    }
+}
