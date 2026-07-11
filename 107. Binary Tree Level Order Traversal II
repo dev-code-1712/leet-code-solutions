@@ -1,0 +1,72 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result = new LinkedList();
+
+        if(root != null) {
+            Queue<List<TreeNode>> queue = new LinkedList();
+
+            List<TreeNode> nodes = new ArrayList();
+            nodes.add(root);
+            queue.offer(nodes);
+
+            List<Integer> list = new ArrayList();
+            list.add(root.val);
+
+            result.add(list);
+
+            levelorder(result, queue);
+        }
+        
+        return result;
+    }
+
+    void levelorder(List<List<Integer>> result, Queue<List<TreeNode>> queue) {
+        while(queue.peek() != null)
+        {
+            List<TreeNode> nodes = queue.poll();
+            List<TreeNode> children = new ArrayList();
+            List<Integer> list = new ArrayList();
+            for(TreeNode node : nodes) {
+                
+                if(node.left != null && node.right == null) {
+                    children.add(node.left);
+                    list.add(node.left.val);
+                    
+                } else if(node.left == null && node.right != null) {
+                    children.add(node.right);
+                    list.add(node.right.val);
+
+                } else if(node.left != null && node.right != null){
+                    children.add(node.left);
+                    list.add(node.left.val);
+
+                    children.add(node.right);
+                    list.add(node.right.val);
+
+                }
+
+            }
+            if(list.size() > 0) {
+                queue.offer(children);
+                result.addFirst(list);
+            }
+            
+        }
+
+    }
+}
