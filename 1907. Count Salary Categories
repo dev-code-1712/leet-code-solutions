@@ -1,0 +1,25 @@
+# Write your MySQL query statement below
+
+select dc.category, 
+    (case when dc2.accounts_count is null then 0 else dc2.accounts_count end) as accounts_count
+from (
+    select 'Low Salary' as category from dual
+    union 
+    select 'Average Salary' as category from dual
+    union
+    select 'High Salary' as category from dual
+) dc 
+left join
+(
+    select a.category, count(*) as accounts_count
+    from (
+        select (case when income < 20000 then 'Low Salary'
+                when income >= 20000 and income <= 50000 then 'Average Salary'
+                else 'High Salary'
+                end
+            ) category
+        from accounts
+    ) a
+    group by category
+) dc2
+on dc.category = dc2.category

@@ -1,0 +1,35 @@
+class Solution {
+
+    int changeInput(char[] chars, char ch, int count, int loc) {
+        int locend = count > 1 ? loc + String.valueOf(count).length() + 1
+        						: loc + String.valueOf(count).length();
+        chars[loc] = ch;
+        if(count > 1) {
+        	char[] vals = String.valueOf(count).toCharArray();
+            for(int i=0; i<vals.length; i++) {
+                chars[loc + 1 + i] = vals[i];
+            }
+        }
+        
+        return locend;
+    }
+
+    public int compress(char[] chars) {
+        char pc = chars[0];
+        int count = 1, sum = 0;
+        for(int i=1; i<chars.length; i++) {
+            if(pc == chars[i])
+                count ++;
+            else {
+
+                sum = changeInput(chars, pc, count, sum);
+                pc = chars[i];
+                count = 1;
+            }
+        }
+
+        sum = changeInput(chars, pc, count, sum);
+        
+        return sum;
+    }
+}

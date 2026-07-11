@@ -1,0 +1,71 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    List<Integer> getNums(ListNode node) {
+        List<Integer> list = new ArrayList();
+        ListNode temp = node;
+        while(temp != null) {
+            list.add(temp.val);
+            temp = temp.next;
+        } 
+        
+        return list;
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        List<Integer> list1 = getNums(l1);
+        List<Integer> list2 = getNums(l2);
+        //System.out.println(list1);
+        //System.out.println(list2);
+
+        List<Integer> result = new ArrayList();
+
+        int i=list1.size(), j=list2.size(); 
+        int sum = 0;
+        while(i>0 && j>0) {
+            sum += list1.get(i-1) + list2.get(j-1);
+            result.add(sum%10);
+            sum /= 10;
+            i--;
+            j--;
+        }
+
+        while(i>0) {
+            sum += list1.get(i-1);
+            result.add(sum%10);
+            sum /= 10;
+            i--;
+        }
+
+        while(j>0) {
+            sum += list2.get(j-1);
+            result.add(sum%10);
+            sum /= 10;
+            j--;
+        }
+        if(sum > 0)
+            result.add(sum);
+        //System.out.println(result);
+
+        ListNode head = null, tail = null;
+        int x = result.size();
+        while(x > 0) {
+            ListNode node = new ListNode(result.get(x-1));
+            if(head == null) {
+                head = tail = node;
+            } else {
+                tail.next = node;
+                tail = node;
+            }
+            x--;
+        }
+        return head;
+    }
+}

@@ -1,0 +1,9 @@
+select  customer_number
+    from (
+        select customer_number, count(*) as total
+        from orders
+        group by customer_number
+    ) a
+where a.total = (select max(aa.total) from ( select customer_number, count(*) as total
+        from orders
+        group by customer_number) aa)   

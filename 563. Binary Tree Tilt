@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int findTilt(TreeNode root) {
+
+        String result = findTilts(root);
+        Integer val = Integer.valueOf(result.split(":")[2]);
+        return val;
+    }
+
+    String findTilts(TreeNode node) {
+        if(node == null) {
+            //System.out.println("0-0-0");
+            return "0:0:0";
+        }
+        String left = findTilts(node.left);
+        String right = findTilts(node.right);
+
+        String[] lv = left.split(":");
+        String[] rv = right.split(":");
+
+        long diff = Long.valueOf(lv[1]) - Long.valueOf(rv[1]);
+        if(diff < 0)
+            diff = -diff;
+        long nodessum = Long.valueOf(lv[1]) + Long.valueOf(rv[1]) + node.val;
+        long tiltsum = Long.valueOf(lv[2]) + Long.valueOf(rv[2]) + diff;
+
+        //System.out.println(diff+"-"+nodessum+"-"+tiltsum);
+        return diff+":"+nodessum+":"+tiltsum;
+    }
+}
