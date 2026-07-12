@@ -1,0 +1,32 @@
+class Solution {
+    public String countAndSay(int n) {
+        String temp = "1";
+        
+        StringBuilder result = new StringBuilder();
+        
+        for(int i=2; i<=n; i++) {
+
+            char[] vals = temp.toCharArray();
+            char ch = vals[0];
+            int count = 1;
+            for(int x=1; x < temp.length(); x++) {
+
+                if(ch == vals[x]) 
+                    count ++;
+                else {
+                    result.append(""+count + ch);
+                    count = 1;
+                	ch = vals[x];
+                }
+            }
+
+            if(count > 0)
+            	result.append(""+count + ch);
+            
+            temp = result.toString();
+            result = new StringBuilder();
+        }
+        //System.out.println(temp);
+        return temp;
+    }
+}
