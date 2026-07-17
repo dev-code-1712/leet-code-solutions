@@ -1,0 +1,7 @@
+class Solution {
+    public String defangIPaddr(String address) {
+        
+        String[] vals = address.split("\\.");
+        return vals[0]+"[.]"+vals[1]+"[.]"+vals[2]+"[.]"+vals[3];
+    }
+}

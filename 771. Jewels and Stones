@@ -1,0 +1,22 @@
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        int sum = 0;
+        Map<Character, Integer> map = new HashMap();
+        
+        for(char ch:stones.toCharArray()) {
+            if(map.get(ch) == null) {
+                map.put(ch, 1);
+            } else {
+                map.put(ch, map.get(ch) + 1);
+            }
+        }
+
+        for(char ch: jewels.toCharArray()) {
+            if(map.get(ch) != null) {
+                sum += map.get(ch);
+            }
+        }
+
+        return sum;
+    }
+}
