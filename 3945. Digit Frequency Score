@@ -1,0 +1,21 @@
+class Solution {
+    public int digitFrequencyScore(int n) {
+        Map<Integer, Integer> map = new HashMap();
+        while(n > 0) {
+            int d = n % 10;
+            if(map.get(d) != null) {
+                map.put(d, map.get(d) + 1);
+            } else {
+                map.put(d, 1);
+            }
+            n = n / 10;
+        }
+        int sum = 0;
+        //System.out.println(map);
+        for(int d : map.keySet()) {
+            sum += d * map.get(d);
+        }
+
+        return sum;
+    }
+}
