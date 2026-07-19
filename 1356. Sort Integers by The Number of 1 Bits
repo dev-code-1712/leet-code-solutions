@@ -1,0 +1,41 @@
+class Solution {
+
+    int findBits(int num) {
+        int count = 0;
+
+        while(num > 0) {
+            if(num % 2 == 1)
+                count++;
+
+            num /= 2;
+        }
+        return count;
+    }
+
+    public int[] sortByBits(int[] arr) {
+        int[] result = new int[arr.length];
+        Map<Integer, List<Integer>> map = new TreeMap();
+        for(int num : arr) {
+            int bits = findBits(num);
+            if(! map.containsKey(bits)) {
+                List<Integer> nums = new ArrayList();
+                nums.add(num);
+
+                map.put(bits, nums);
+            } else {
+                map.get(bits).add(num);
+            }
+        }
+
+        int i = 0;
+        for(int key : map.keySet()) {
+            List<Integer> list = map.get(key);
+            Collections.sort(list);
+
+            for(int j: list)
+                result[i++] = j;
+        }
+
+        return result;
+    }
+}
