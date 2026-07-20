@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    void leavessum(TreeNode node, Map<Integer, List<Integer>> map, int depth) {
+        if(node == null)
+            return;
+        if(node.left == null && node.right == null) {
+            if(map.containsKey(depth)) {
+                map.get(depth).add(node.val);
+            } else {
+                List<Integer> list = new ArrayList();
+                list.add(node.val);
+                map.put(depth, list);
+            }
+        }
+        leavessum(node.left, map, depth+1);
+        leavessum(node.right, map, depth+1);
+    }
+    public int deepestLeavesSum(TreeNode root) {
+        int sum = 0;
+        Map<Integer, List<Integer>> map = new HashMap();
+        leavessum(root, map, 0);
+        Set<Integer> set = map.keySet();
+        List<Integer> list = new ArrayList(set);
+        Collections.sort(list);
+        for(int num : map.get(list.get(list.size() - 1))) {
+            sum += num;
+        }
+        return sum;
+    }
+}
