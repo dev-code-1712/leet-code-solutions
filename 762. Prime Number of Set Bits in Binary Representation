@@ -1,0 +1,28 @@
+class Solution {
+    public int countPrimeSetBits(int left, int right) {
+        int count = 0;
+        for(int i=left; i<=right; i++) {
+            int ones = 0;
+            int temp = i;
+            while(temp > 0) {
+                if(temp % 2 == 1)
+                    ones++;
+                temp = temp / 2;
+            }
+            if(ones > 1) {
+                boolean flag = false;
+                for(int k=2; k <= ones/2; k++) {
+                    if(ones % k == 0) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if(!flag)
+                    count++;
+            }
+            
+        }
+
+        return count;
+    }
+}
