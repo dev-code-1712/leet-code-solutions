@@ -1,0 +1,26 @@
+class Solution {
+    public int binaryGap(int n) {
+        int max = 0, count = 0;
+        boolean flag = false;
+        while(n > 0) {
+            int d = n%2;
+            n = n/2;
+            if(flag)
+                count ++;
+            
+            if(d == 0) 
+                continue;
+            
+            if(d == 1) {
+                if(flag) {
+                    if(max < count)
+                        max = count;
+                }
+                count = 0;
+                flag = true;
+            }
+            
+        }
+        return max;
+    }
+}
