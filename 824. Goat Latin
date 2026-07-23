@@ -1,0 +1,31 @@
+class Solution {
+    boolean isStartsWithVowel(char ch) {
+        if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+            return true;
+        else
+            return false;
+    }
+    public String toGoatLatin(String sentence) {
+        String[] vals = sentence.split(" ");
+        StringBuilder result = new StringBuilder();
+
+        String pad = "a";
+        for(String str : vals) {
+            if(result.length() > 0)
+                result.append(" ");
+
+            if(isStartsWithVowel(str.charAt(0))) {
+                result.append(str);
+                        
+            } else {
+                result.append(str.substring(1, str.length()))
+                        .append(str.charAt(0));
+            }
+            result = result.append("ma")
+                            .append(pad);
+            pad += "a";
+        }
+        return result.toString();
+    }
+}
