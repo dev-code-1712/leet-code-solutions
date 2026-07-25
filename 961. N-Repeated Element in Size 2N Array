@@ -1,0 +1,20 @@
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        Map<Integer, Integer> map = new HashMap();
+        int result = -1;
+        for(int num : nums) {
+            if(map.containsKey(num)) {
+                if(map.get(num) + 1 == nums.length/2) {
+                    result = num;
+                    break;
+                } else {
+                    map.put(num, map.get(num) + 1);
+                }
+            } else {
+                map.put(num, 1);
+            }
+        }
+
+        return result;
+    }
+}
