@@ -1,0 +1,24 @@
+class Solution {
+    public int getLucky(String s, int k) {
+       StringBuilder str = new StringBuilder();
+       for(char ch: s.toCharArray()) {
+            str.append(ch - 96);
+       }
+
+       int num = 0;
+       for(char ch : str.toString().toCharArray()) {
+            num += ch - 48;
+       }
+
+        for(int count = 1; count <= k-1; count++) {
+            int sum = 0;
+            while(num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+
+        }
+       return num;
+    }
+}

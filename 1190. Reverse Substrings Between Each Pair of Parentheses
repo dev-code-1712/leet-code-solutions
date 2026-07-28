@@ -1,0 +1,34 @@
+class Solution {
+    public String reverseParentheses(String s) {
+        Stack<String> stack = new Stack();
+        for(int i=0; i<s.length(); i++) {
+            if(s.charAt(i) == '(' ||
+                (s.charAt(i) >= 'a' && s.charAt(i) <= 'z')) {
+
+                stack.push(""+s.charAt(i));
+                System.out.println(stack);
+            } else if(s.charAt(i) == ')') {
+                StringBuilder str = new StringBuilder();
+                String item = stack.pop();
+                while(!item.equals("(")) {
+                    if(item.length() > 1) 
+                        str.append(new StringBuilder(item).reverse());
+                    else 
+                        str.append(item);
+
+                    item = stack.pop();
+                }
+                if(str.length() > 0)
+                    stack.push(str.toString());
+                
+            }
+        }
+        System.out.println(stack);
+
+        String result = "";
+        while(!stack.empty()) {
+            result = stack.pop() + result;
+        }
+        return result;
+    }
+}

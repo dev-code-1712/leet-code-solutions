@@ -1,0 +1,37 @@
+class Solution {
+    Map<Character, Integer> getMap(String word) {
+        Map<Character, Integer> map = new HashMap();
+        int sum = 0;
+        for(int i=0; i<word.length(); i++) {
+            if(map.containsKey(word.charAt(i))) {
+                map.put(word.charAt(i), map.get(word.charAt(i)) + 1);
+            } else {
+                map.put(word.charAt(i), 1);
+            }
+        }
+
+        return map;
+    }
+    public int countCharacters(String[] words, String chars) {
+        int sum = 0;
+        Map<Character, Integer> map = getMap(chars);
+        
+        for(String str : words) {
+            boolean flag = false;
+            Map<Character, Integer> nmap = getMap(str);
+            for(char ch: nmap.keySet()) {
+                if(!nmap.containsKey(ch) ||
+                    !map.containsKey(ch) ||
+                        nmap.get(ch) > map.get(ch)) {
+
+                    flag = true;
+                    break;
+                }
+            }
+            if(!flag)
+                sum += str.length();
+        }
+
+        return sum;
+    }
+}
