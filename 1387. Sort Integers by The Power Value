@@ -1,0 +1,38 @@
+class Solution {
+    public int getKth(int lo, int hi, int k) {
+        Map<Integer, List<Integer>> map = new TreeMap();
+        for(int num = lo; num <= hi; num++) {
+            int count = 0, temp = num;
+            while(temp != 1) {
+                
+                if(temp % 2 == 0)
+                    temp = temp / 2;
+                else
+                    temp = 3 * temp + 1;
+                count ++;
+                
+            }
+
+            List<Integer> list = null;
+            if(!map.containsKey(count)) {
+            	list = new ArrayList();
+            } else {
+            	list = map.get(count);
+            }
+            list.add(num);
+            map.put(count, list);
+        }
+
+        int count = 1, result = 0;
+        for(int num:map.keySet()) {
+        	for(int x : map.get(num)) {
+        		if(count == k) {
+                    result = x;
+                }
+                count ++;
+        	}
+        }
+
+        return result;
+    }
+}
