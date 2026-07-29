@@ -1,0 +1,28 @@
+class Solution {
+    public char findKthBit(int n, int k) {
+        
+        String str = findNthString(n);
+        //System.out.println(str);
+        return str.toCharArray()[k-1];
+    }
+
+    String findNthString(int n) {
+        if(n <= 1)
+            return "0";
+        else
+            return findNthString(n-1) + 
+                    "1" +
+                    reverse(invert(findNthString(n-1)));
+    }
+    String reverse(String str) {
+        return new StringBuilder(str).reverse().toString();
+    }
+
+    String invert(String str) {
+        StringBuilder result = new StringBuilder();
+        for(char ch:str.toCharArray()) {
+            result.append(ch == '0'? "1" : "0");
+        }
+        return result.toString();
+    }
+}

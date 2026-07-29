@@ -1,0 +1,36 @@
+class Solution {
+    int check(int i, int j) {
+        for(int k=2; k<=i; k++) {
+            if(i%k == 0 && j%k == 0)
+                return k;
+        }
+        return -1;
+    }
+    public List<String> simplifiedFractions(int n) {
+        List<String> list = new ArrayList();
+
+        for(int i=1; i<n; i++) {
+            for(int j=i+1; j<=n; j++) {
+                String str = "";
+                if(i > 1) {
+                    int d = 0, x = i, y = j;
+                    do {
+                        d = check(x, y);
+                        if(d != -1) {
+                            x /= d;
+                            y /= d;
+                        }
+                        
+                    } while(d != -1);
+                    str = ""+x+"/"+y;
+                } else {
+                    str = ""+i+"/"+j;
+                }
+                if(! list.contains(str)) {
+                    list.add(str);
+                }
+            }
+        }
+        return list;
+    }
+}
