@@ -1,0 +1,15 @@
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int sum = 0, bal = 0, temp = 0;
+        
+        do {
+            sum += numBottles;
+            temp = (numBottles + bal) / numExchange;
+            bal = (numBottles + bal) % numExchange;
+            numBottles = temp;
+
+        } while(numBottles > 0);
+
+        return sum;
+    }
+}
