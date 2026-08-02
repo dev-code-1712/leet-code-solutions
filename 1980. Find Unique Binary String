@@ -1,0 +1,44 @@
+class Solution {
+    public String findDifferentBinaryString(String[] nums) {
+        int[] anums = new int[nums.length];
+        int len = nums[0].length();
+        for(int i=0; i<nums.length; i++) {
+            int sum = 0;
+            for(int j=0; j<len; j++) {
+                sum = sum * 2 + nums[i].charAt(j) - 48;
+            }
+            anums[i] = sum;
+        }
+
+        Arrays.sort(anums);
+        int firstmissed = 0, maxvalue = (int) Math.pow(2, len)-1;
+        boolean flag = false;
+        
+        for(int i=0; i<=maxvalue; i++) {
+        	flag = false;
+        	for(int j=0; j<anums.length; j++) {
+        		if(i == anums[j]) {
+        			flag = true;
+        			break;
+        		}
+        	}
+            if(!flag) {
+                firstmissed = i;
+                break;
+            }
+        }
+
+        String result = "";
+        int temp = firstmissed;
+        while(temp > 0) {
+            result = (temp % 2) + result;
+            temp /= 2;
+        }
+        int padlen = len - result.length();
+        for(int i=0; i<padlen; i++) {
+        	result = "0"+result;
+        }
+
+        return result;
+    }
+}
