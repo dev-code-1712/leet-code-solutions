@@ -1,0 +1,36 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> studentsqueue = new LinkedList();
+        for(int i:students) 
+            studentsqueue.offer(i);
+
+        Queue<Integer> sandqueue = new LinkedList();
+        for(int i:sandwiches) 
+            sandqueue.offer(i);
+
+        boolean changed = false;
+        int count = 0, size = studentsqueue.size();
+        while(true) {
+            //System.out.println(studentsqueue+" "+sandqueue);
+
+            if(studentsqueue.peek() != sandqueue.peek()) {
+                studentsqueue.offer(studentsqueue.poll());
+            } else {
+                studentsqueue.poll();
+                sandqueue.poll();
+                changed = true;
+            }
+
+            if(changed) {
+                changed = false;
+                count = 0;
+                size = studentsqueue.size();
+            } else {
+                count ++;
+            }
+            if(count == size)
+                break;
+        }
+        return studentsqueue.size();
+    }
+}

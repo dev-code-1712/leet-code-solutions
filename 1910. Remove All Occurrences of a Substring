@@ -1,0 +1,16 @@
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        String temp = s;
+        int loc = -1;
+        do {
+            loc = s.indexOf(part);
+            System.out.println(temp +" "+loc);
+            if(loc != -1) {
+                temp = s.substring(0, loc) + s.substring(loc+part.length(), s.length());
+            }
+            s = temp;
+        } while(loc != -1);
+        //System.out.println(temp);
+        return s;
+    }
+}

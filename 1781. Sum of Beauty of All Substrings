@@ -1,0 +1,38 @@
+class Solution {
+    int beauty(String str) {
+        int max = 0, min = 0;
+        int[] letters = new int[26];
+
+        for(int i=0; i<str.length(); i++) {
+            char ch = str.charAt(i);
+            letters[ch - 'a'] ++;
+        }
+        int pos = -1;
+        for(int i=0; i<26; i++) {
+            if(max < letters[i]) {
+                pos = i;
+                max = min = letters[i];
+            }
+        }
+
+        for(int i=0; i<26; i++) {
+            if(min > letters[i] && letters[i] != 0 && pos != i)
+                min = letters[i];
+        }
+
+        return min == max ? 0 : max - min;
+    }
+    public int beautySum(String s) {
+        int len = s.length();
+        int sum = 0;
+        for(int i=0; i<len; i++) {
+            for(int j=i+1; j<len; j++) {
+                String str = s.substring(i, j+1);
+                int b = beauty(str);
+                sum += b;
+
+            }
+        }
+        return sum;
+    }
+}

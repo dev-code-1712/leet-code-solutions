@@ -1,0 +1,22 @@
+class Solution {
+    public String sortSentence(String s) {
+        String[] words = new String[10];
+
+        for(String str : s.split(" ")) {
+            int d = str.charAt(str.length() - 1) - 48;
+            words[d] = str.substring(0, str.length() - 1);
+        }
+
+        String result = "";
+        for(int i=0; i<=9; i++) {
+            if(words[i] != null) {
+                if(result.length() == 0)
+                    result = words[i];
+                else
+                    result += " "+words[i];
+            }
+        }
+
+        return result;
+    }
+}
