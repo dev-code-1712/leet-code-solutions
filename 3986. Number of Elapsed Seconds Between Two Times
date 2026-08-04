@@ -1,0 +1,18 @@
+class Solution {
+    public int secondsBetweenTimes(String startTime, String endTime) {
+        int sh = 0, sm = 0, ss = 0;
+        int eh = 0, em = 0, es = 0;
+
+        String[] vals = startTime.split(":");
+        sh = Integer.valueOf(vals[0]);
+        sm = Integer.valueOf(vals[1]);
+        ss = Integer.valueOf(vals[2]);
+
+        String[] vals2 = endTime.split(":");
+        eh = Integer.valueOf(vals2[0]);
+        em = Integer.valueOf(vals2[1]);
+        es = Integer.valueOf(vals2[2]);
+
+        return (eh-sh)*60*60 + (em-sm)*60 + (es-ss);
+    }
+}
