@@ -1,0 +1,40 @@
+class Solution {
+    public int maxDigitRange(int[] nums) {
+        Map<Integer, List<Integer>> map = new HashMap();
+        for(int num : nums) {
+            int min = Integer.MAX_VALUE, max = 0;
+            int temp = num;
+            while(temp > 0) {
+                int d = temp % 10;
+
+                if(min > d)
+                    min = d;
+
+                if(d > max) 
+                    max = d;
+
+                temp /= 10;
+            }
+            int diff = max - min;
+            List<Integer> list = null;
+            if(map.containsKey(diff)) {
+                list = map.get(diff);
+            } else {
+                list = new ArrayList();
+            }
+            list.add(num);
+            map.put(diff, list);
+        }
+
+        int sum = 0;
+        for(int i=9; i>=0; i--) {
+            if(map.get(i) != null) {
+                for(int num : map.get(i))
+                    sum += num;
+                break;
+            }
+        }
+
+        return sum;
+    }
+}
