@@ -1,0 +1,24 @@
+class Solution {
+    Set<Character> findSet(String str) {
+        Set<Character> set = new HashSet();
+        for(char ch : str.toCharArray()) {
+            set.add(ch);
+        }
+        return set;
+    }
+
+    public int similarPairs(String[] words) {
+        int count = 0;
+
+        for(int i=0; i<words.length - 1; i++) {
+            Set<Character> set = findSet(words[i]);
+            for(int j=i+1; j<words.length; j++) {
+                Set<Character> tempset = findSet(words[j]);
+                if(set.containsAll(tempset) && tempset.containsAll(set))
+                    count ++;
+            }
+        }
+
+        return count;
+    }
+}

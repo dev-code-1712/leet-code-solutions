@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> removeSubfolders(String[] folder) {
+        Arrays.sort(folder);
+        List<String> result = new ArrayList();
+        String check = "";
+        for(String str:folder) {
+            //System.out.println(check +" "+str +" "+result);
+            if(check == "") {
+                check = str;
+                continue;
+            }
+            int loc = str.indexOf(check+"/");
+            //System.out.println(loc);
+            if(loc != 0) {
+            	result.add(check);
+                check = str;
+            }
+        }
+        result.add(check);
+        return result;
+    }
+}

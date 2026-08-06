@@ -1,0 +1,40 @@
+class Solution {
+    int reverse(int n) {
+        int val = 0;
+        while(n > 0) {
+            val = val * 10 + n % 10;
+            n/= 10;
+        }
+
+        return val;
+    }
+    public int sumOfPrimesInRange(int n) {
+        int reval = reverse(n);
+        int x = 0, y = 0;
+
+        if(reval < n) {
+            x = reval;
+            y = n;
+        } else {
+            x = n;
+            y = reval;
+        }
+        if(x == 1)
+            x = 2;
+
+        int sum = 0;
+        for(int i=x; i<=y; i++) {
+            boolean flag = true;
+            for(int j=2; j <= i/2; j++) {
+                if(i % j == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+}
