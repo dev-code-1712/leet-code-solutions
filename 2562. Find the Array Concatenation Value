@@ -1,0 +1,14 @@
+class Solution {
+    public long findTheArrayConcVal(int[] nums) {
+        long sum = 0;
+        int len = nums.length;
+        for(int i=0; i<len / 2; i++) {
+            String str = nums[i]+""+nums[len-i-1];
+            sum += Long.valueOf(str);
+        }
+        if(len % 2 == 1) {
+            sum += nums[len/2];
+        }
+        return sum;
+    }
+}
