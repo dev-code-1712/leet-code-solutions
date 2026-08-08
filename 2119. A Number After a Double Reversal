@@ -1,0 +1,23 @@
+class Solution {
+    int reverse(int num) {
+        int temp = num, sum = 0;
+        while(temp > 0) {
+            int d = temp % 10;
+            temp /= 10;
+            if(d == 0 && sum == 0) {
+                continue;
+            } else {
+                sum = sum*10 + d;
+            }
+ 
+        }
+        //System.out.println(sum);
+        return sum;
+    }
+    public boolean isSameAfterReversals(int num) {
+        int temp = reverse(num);
+        temp = reverse(temp);
+
+        return temp == num;
+    }
+}
