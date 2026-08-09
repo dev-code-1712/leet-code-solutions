@@ -1,0 +1,20 @@
+class Solution {
+    public boolean checkString(String s) {
+        boolean bstarted = false;
+        for(int i=0; i<s.length(); i++) {
+            if(!bstarted && s.charAt(i) == 'a' || 
+                bstarted && s.charAt(i) == 'b' )
+                continue;
+            
+            if(!bstarted && s.charAt(i) == 'b') {
+                bstarted = true;
+                continue;
+            }
+            
+            if(bstarted && s.charAt(i) == 'a')
+                return false;
+        }
+
+        return true;
+    }
+}

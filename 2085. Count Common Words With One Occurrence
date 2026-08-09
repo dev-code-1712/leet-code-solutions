@@ -1,0 +1,31 @@
+class Solution {
+    Map<String, Integer> getMap(String[] words) {
+        Map<String, Integer> map = new HashMap();
+        for(String str:words) {
+            if(map.containsKey(str)) {
+                map.put(str, map.get(str) + 1);
+            } else {
+                map.put(str, 1);
+            }
+        }
+
+        return map;
+    }
+    public int countWords(String[] words1, String[] words2) {
+        int count = 0;
+        Map<String, Integer> map1 = getMap(words1);
+        Map<String, Integer> map2 = getMap(words2);
+
+        Set<String> set1 = map1.keySet();
+        Set<String> set2 = map2.keySet();
+
+        set1.retainAll(set2);
+
+        for(String str: set1) {
+            if(map1.get(str) == 1 && map2.get(str) == 1)
+                count ++;
+        }
+
+        return count;
+    }
+}
