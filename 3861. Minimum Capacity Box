@@ -1,0 +1,23 @@
+class Solution {
+    public int minimumIndex(int[] capacity, int itemSize) {
+        int result = -1, min = -1;
+
+        for(int i=0; i<capacity.length; i++) {
+            int diff = capacity[i] - itemSize;
+            if(diff >= 0) {
+                if(result == -1) {
+                    result = i;
+                    min = diff;
+                }
+            } 
+            
+            if(result != -1 && diff >= 0 && diff < min) {
+                min = diff;
+                result = i;
+            }
+
+        }
+
+        return result;
+    }
+}
