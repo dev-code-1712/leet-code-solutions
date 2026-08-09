@@ -1,0 +1,13 @@
+class Solution {
+    public boolean validDigit(int n, int x) {
+        boolean flag = false;
+        int last = -1;
+        while(n > 0) {
+            last = n % 10;
+            if(!flag && last == x)
+                flag = true;
+            n/= 10;
+        }
+        return flag && last != x;
+    }
+}
