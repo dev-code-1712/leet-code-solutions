@@ -1,0 +1,40 @@
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+        int pg = 0, gg = 0, mg = 0;
+        int pt = 0, gt = 0, mt = 0;
+        for(int i=0; i<garbage.length; i++) {
+            int glass = 0, paper = 0, metal = 0;
+            for(int j=0; j<garbage[i].length(); j++) {
+                if(garbage[i].charAt(j) == 'G')
+                    glass ++;
+                else if(garbage[i].charAt(j) == 'P')
+                    paper ++;
+                else if(garbage[i].charAt(j) == 'M')
+                    metal ++;
+            }
+            if(i == 0) {
+                    pg = paper;
+                    gg = glass;
+                    mg = metal;
+            } else {
+                pt += travel[i-1];
+                if(paper > 0) {
+                    pg += pt + paper; 
+                    pt = 0;
+                }
+                gt += travel[i-1];
+                if(glass > 0) {
+                    gg += gt + glass; 
+                    gt = 0;
+                }
+                mt += travel[i-1];
+                if(metal > 0) {
+                    mg += mt + metal; 
+                    mt = 0;
+                }
+            }
+            
+        }
+        return pg + gg + mg;
+    }
+}
