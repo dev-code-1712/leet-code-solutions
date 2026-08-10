@@ -1,0 +1,31 @@
+class Solution {
+    public int[][] sortTheStudents(int[][] score, int k) {
+        Map<Integer, List<Integer>> map = new HashMap();
+        for(int i=0; i<score.length; i++) {
+            List<Integer> list = new ArrayList();
+            for(int j=0; j<score[0].length; j++) {
+                list.add(score[i][j]);
+            }
+            map.put(score[i][k], list);
+        }
+
+
+        List<Integer> list = null;
+        Set<Integer> set = new TreeSet(Collections.reverseOrder());
+        set.addAll(map.keySet());
+
+        int i = 0;
+        for(int val: set) {
+            list = map.get(val);
+            for(int j=0; j<list.size(); j++) {
+                if(k == j)
+                    score[i][j] = val;
+                else
+                    score[i][j] = list.get(j);
+            }
+            i++;
+        }
+
+        return score;
+    }
+}
