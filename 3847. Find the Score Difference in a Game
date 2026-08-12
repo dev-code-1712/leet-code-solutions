@@ -1,0 +1,22 @@
+class Solution {
+    public int scoreDifference(int[] nums) {
+        boolean first = true, second = false;
+        int firstsum = 0, secondsum = 0;
+        for(int i=0; i<nums.length; i++) {
+            if(nums[i] % 2 == 1) {
+                first = !first;
+                second = !second;
+            }
+            if((i+1) % 6 == 0) {
+                first = !first;
+                second = !second;
+            }
+            if(first)
+                firstsum += nums[i];
+            else
+                secondsum += nums[i];
+        }
+
+        return firstsum - secondsum;
+    }
+}
