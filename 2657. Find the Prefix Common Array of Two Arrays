@@ -1,0 +1,23 @@
+class Solution {
+    int getPrefixCommonCount(Set<Integer> set, int[] B, int loc) {
+        int count = 0;
+        for(int i=0; i<=loc; i++) {
+            if(set.contains(B[i]))
+                count ++;
+        }
+        return count;
+    }
+
+    public int[] findThePrefixCommonArray(int[] A, int[] B) {
+        Set<Integer> set = new HashSet();
+        int len = A.length;
+        int[] C = new int[len];
+
+        for(int i=0; i<len; i++) {
+            set.add(A[i]);
+            C[i] = getPrefixCommonCount(set, B, i);
+        }
+
+        return C;
+    }
+}

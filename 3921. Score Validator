@@ -1,0 +1,21 @@
+class Solution {
+    public int[] scoreValidator(String[] events) {
+        int counter = 0, score = 0;
+        for(String str:events) {
+            if(counter >= 10)
+                break;
+            
+            if(str.equals("0") || str.equals("1") || str.equals("2") || str.equals("3") || 
+                str.equals("4") || str.equals("6"))
+                    score += Integer.valueOf(str);
+                    
+            else if(str.equals("W"))
+                counter ++;
+            
+            else if(str.equals("WD") || str.equals("NB"))
+                score ++;
+        }
+
+        return new int[]{score, counter};
+    }
+}
