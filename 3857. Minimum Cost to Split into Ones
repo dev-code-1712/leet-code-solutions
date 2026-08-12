@@ -1,0 +1,35 @@
+class Solution {
+    
+    void splits(int n, Set<Integer> set, List<Integer> list) {
+        if(n == 1) {
+            return;
+        }
+        
+        if(n % 2 == 1) {
+            set.add(n);
+            list.add(n-1);
+            splits(n-1, set, list);
+        } else {
+            set.add(n);
+            list.add(n/2 * n/2);
+            splits(n/2, set, list);
+            splits(n/2, set, list);
+        }
+    }
+
+    public int minCost(int n) {
+        Set<Integer> set = new HashSet();
+        List<Integer> list = new ArrayList();
+        set.add(1);
+        splits(n, set, list);
+
+        //System.out.println(set +" "+list);
+
+        int cost = 0;
+        for(int val : list) {
+            cost += val;
+        }
+
+        return cost;
+    }
+}
