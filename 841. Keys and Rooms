@@ -1,0 +1,26 @@
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        Set<Integer> visited = new HashSet();
+        Set<Integer> notvisited = null;
+        visited.add(0);
+        boolean flag = false;
+        Set<Integer> temp = new HashSet(rooms.get(0));
+        do {
+        	flag = false;
+        	notvisited = new HashSet();
+        	for(int room : temp) {
+                if(!visited.contains(room)) {
+                	visited.add(room);
+                	flag = true;
+                }
+                
+                notvisited.addAll(rooms.get(room));
+
+            }
+        	notvisited.removeAll(visited);
+        	temp = new HashSet(notvisited);
+        } while(flag == true);
+
+        return visited.size() == rooms.size();
+    }
+}
