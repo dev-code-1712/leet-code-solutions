@@ -1,0 +1,31 @@
+class Solution {
+    public int[] occurrencesOfElement(int[] nums, int[] queries, int x) {
+
+        int[] result = new int[queries.length];
+        Map<Integer, List<Integer>> map = new HashMap();
+        for(int i=0; i<nums.length; i++) {
+            List<Integer> list = null;
+            if(map.containsKey(nums[i])) 
+                list = map.get(nums[i]);
+            else
+                list = new ArrayList();
+            list.add(i);
+
+            map.put(nums[i], list);
+        }
+        
+        if(map.get(x) == null) {
+            Arrays.fill(result, -1);
+        } else {
+            for(int i=0; i<queries.length; i++) {
+                List<Integer> list = map.get(x);
+                if(list == null)
+                    result[i] = -1;
+                else 
+                    result[i] = list.size() >= queries[i] ? list.get(queries[i]-1) : -1;
+            }
+        }
+    
+        return result;
+    }
+}
