@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int maxAncestorDiff(TreeNode root) {
+        List<String> list = new ArrayList();
+        findPaths(root, "", list);
+
+        //System.out.println(list);
+        int max = 0;
+        for(String str : list) {
+            String[] vals = str.split("-");
+            for(int i=0; i<vals.length - 1; i++) {
+                for(int j=i+1; j<vals.length; j++) {
+                    int x = Integer.valueOf(vals[i]);
+                    int y = Integer.valueOf(vals[j]);
+
+                    int diff = Math.abs(x-y);
+                    if(max < diff)
+                        max = diff;
+                }
+            }
+        }
+        return max;
+    }
+
+    void findPaths(TreeNode node, String path, List<String> list) {
+        if(node.left == null && node.right == null) {
+            path += "-"+node.val;
+            list.add(path);
+            return;
+        }
+        if(path.length() > 0)
+            path += "-"+node.val;
+        else
+            path = ""+node.val;
+
+        if(node.left != null)
+            findPaths(node.left, path, list);
+        
+        if(node.right != null)
+            findPaths(node.right, path, list);
+    }
+}
