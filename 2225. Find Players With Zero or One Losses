@@ -1,0 +1,40 @@
+class Solution {
+    public List<List<Integer>> findWinners(int[][] matches) {
+        Map<Integer, Integer> winnermap = new HashMap();
+        Map<Integer, Integer> lostmap = new HashMap();
+        for(int i=0; i<matches.length; i++) {
+
+            if(winnermap.containsKey(matches[i][0])) {
+                winnermap.put(matches[i][0], winnermap.get(matches[i][0]) + 1);
+            } else {
+                winnermap.put(matches[i][0], 1);
+            }
+
+            if(lostmap.containsKey(matches[i][1])) {
+                lostmap.put(matches[i][1], lostmap.get(matches[i][1]) + 1);
+            } else {
+                lostmap.put(matches[i][1], 1);
+            }
+        }
+        List<Integer> winlist = new ArrayList();
+        for(int winner : winnermap.keySet()) {
+            if(!lostmap.containsKey(winner))
+                winlist.add(winner);
+        }
+
+        List<Integer> lostonelist = new ArrayList();
+        for(int losser : lostmap.keySet()) {
+            if(lostmap.get(losser) == 1)
+                lostonelist.add(losser);
+        }
+        
+        Collections.sort(winlist);
+        Collections.sort(lostonelist);
+
+        List<List<Integer>> list = new ArrayList();
+        list.add(winlist);
+        list.add(lostonelist);
+
+        return list;
+    }
+}

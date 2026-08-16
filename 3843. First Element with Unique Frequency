@@ -1,0 +1,32 @@
+class Solution {
+    public int firstUniqueFreq(int[] nums) {
+        Map<Integer, Integer> map = new LinkedHashMap();
+        for(int val : nums) {
+            if(map.containsKey(val))
+                map.put(val, map.get(val) + 1);
+            else
+                map.put(val, 1);
+        }
+
+
+        Map<Integer, List<Integer>> map2 = new LinkedHashMap();
+        for(int val : map.keySet()) {
+            List<Integer> list = null;
+            int count = map.get(val);
+            if(map2.containsKey(count)) {
+                list = map2.get(count);
+            } else {
+                list = new ArrayList();
+            }
+            list.add(val);
+            map2.put(count, list);
+        }
+
+        for(int num : map2.keySet()) {
+            if(map2.get(num).size() == 1) {
+                return map2.get(num).get(0);
+            }
+        }
+        return -1;
+    }
+}

@@ -1,0 +1,29 @@
+class Solution {
+    public int[] shortestToChar(String s, char c) {
+        int[] result = new int[s.length()];
+        int prev = -1, d = 0;
+        int first = s.indexOf(c);
+        int next = first;
+        for(int i=0; i<s.length(); i++) {
+        	
+        	if(next > -1 && i > next) {
+        		prev = next;
+        		int pos = s.substring(i).indexOf(c);
+        		if(pos != -1)
+        			next = prev + pos + 1;
+        		else
+        			next = pos;
+        	}
+        	if(prev == -1)
+        		d = next - i;
+        	else if(next == -1)
+        		d = i - prev;
+        	else {
+        		d = Math.min(i-prev, next-i);
+        	}
+
+            result[i] = d;
+        }
+        return result;
+    }
+}
