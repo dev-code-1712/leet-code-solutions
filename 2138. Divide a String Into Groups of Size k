@@ -1,0 +1,31 @@
+class Solution {
+    public String[] divideString(String s, int k, char fill) {
+        int len = s.length();
+        int parts = -1;
+        if(len % k == 0)
+            parts = len / k;
+        else
+            parts = len / k + 1;
+        
+        String[] result = new String[parts];
+        for(int i=0; i<parts; i++) {
+
+            int end = 0;
+            if(len < (i+1)*k)
+                end = len;
+            else
+                end = (i+1)*k;
+
+            String str = s.substring(i*k, end);
+
+            if(str.length() != k) {
+                int x = str.length();
+                for(int j=0; j < k-x; j++)
+                    str += fill;
+            }
+
+            result[i] = str;
+        }
+        return result;
+    }
+}
