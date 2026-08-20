@@ -1,0 +1,19 @@
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+        Map<Integer, Integer> map = new HashMap();
+        for(int val : nums) {
+            if(map.containsKey(val))
+                map.put(val, map.get(val) + 1);
+            else
+                map.put(val, 1);
+        }
+        int x = 0, y =0;
+        for(int key : map.keySet()) {
+            int count = map.get(key);
+            x += count / 2;
+            y += count % 2;
+        }
+
+        return new int[]{x, y}; 
+    }
+}
