@@ -1,0 +1,28 @@
+class Solution {
+    public String reverseOnlyLetters(String s) {
+
+        StringBuilder str = new StringBuilder();
+        for(int i=0; i<s.length(); i++) {
+            char ch = s.charAt(i);
+            if( (ch >='a' && ch <= 'z') || (ch >='A' && ch <= 'Z') )
+                str.append(ch);
+        }
+        
+        if(str.length() == 0)
+            return s;
+
+        String original = str.reverse().toString();
+
+        StringBuilder rev = new StringBuilder();
+        int loc = 0;
+        for(int i=0; i<s.length(); i++) {
+            char ch = s.charAt(i);
+            if( (ch >='a' && ch <= 'z') || (ch >='A' && ch <= 'Z') )
+                rev.append(original.charAt(loc ++));
+            else
+                rev.append(ch);
+        }
+
+        return rev.toString();
+    }
+}
