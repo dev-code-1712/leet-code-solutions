@@ -1,0 +1,15 @@
+class Solution {
+    public int bitwiseComplement(int n) {
+        if(n == 0)
+            return 1;
+        
+        String str = "";
+        while(n > 0) {
+            str = (n % 2 == 1 ? 0 : 1) + str;
+            n /= 2;
+        }
+
+        n = Integer.valueOf(str.toString(), 2);
+        return n;
+    }
+}
