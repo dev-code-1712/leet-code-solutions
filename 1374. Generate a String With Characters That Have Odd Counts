@@ -1,0 +1,19 @@
+class Solution {
+    public String generateTheString(int n) {
+        String result = "";
+        int len = 0;
+        if(n % 2 == 0)
+            len = n-1;
+        else
+            len = n;
+
+        char[] chars = new char[len];
+        Arrays.fill(chars, 'a');
+        result = String.valueOf(chars);
+
+        if(len == n-1)
+            result += "b";
+        
+        return result;
+    }
+}
