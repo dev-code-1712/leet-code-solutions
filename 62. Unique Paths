@@ -1,0 +1,23 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] memory = new int[m][n];
+        int x = findPath(0,0, m, n, memory);
+        return x;
+    }
+    int findPath(int sr, int sc, int er, int ec, int[][] memory) {
+        
+        if(memory[sr][sc] > 0)
+            return memory[sr][sc];
+
+        if(sr == er-1 && sc == ec-1) {
+            return 1;
+        }
+        
+        int x = (sr+1 < er ? findPath(sr+1, sc, er, ec, memory) : 0) + 
+            (sc+1 < ec ? findPath(sr, sc+1, er, ec, memory) : 0) ;
+        
+        memory[sr][sc] = x;
+        
+        return x;
+    }
+}
