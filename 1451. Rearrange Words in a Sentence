@@ -1,0 +1,31 @@
+class Solution {
+    public String arrangeWords(String text) {
+        Map<Integer, List<String>> map = new TreeMap();
+        List<String> list = null;
+        for(String str : text.split(" ")) {
+            int len = str.length();
+            if(map.containsKey(len)) {
+                list = map.get(len);
+                list.add(str.toLowerCase());
+            } else {
+                list = new ArrayList();
+                list.add(str.toLowerCase());
+                map.put(len, list);
+            }
+        }
+        //System.out.println(map);
+        StringBuilder builder = new StringBuilder();
+        for(int len : map.keySet()) {
+            for(String str:map.get(len)) {
+                if(builder.length() == 0) {
+                    char[] chars = str.toCharArray();
+                    chars[0] = (char)((chars[0]) - 32);
+                    builder.append(String.valueOf(chars));
+                } else {
+                    builder.append(" ").append(str);
+                }
+            }
+        }
+        return builder.toString();
+    }
+}
