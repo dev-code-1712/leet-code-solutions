@@ -1,0 +1,39 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+        Map<Integer, List<Integer>> map = new HashMap();
+        List<Integer> list = null;
+        for(int i=0; i<boxTypes.length; i++) {
+            if(map.containsKey(boxTypes[i][1])) {
+                list = map.get(boxTypes[i][1]);
+                list.add(boxTypes[i][0]);
+            } else {
+                list = new ArrayList();
+                list.add(boxTypes[i][0]);
+                map.put(boxTypes[i][1], list);
+            }
+        }
+
+
+        Set<Integer> set = new TreeSet(Comparator.reverseOrder());
+        set.addAll(map.keySet());
+
+        int max = 0;
+        for(int units : set) {
+        	if(truckSize > 0) {
+        		for(int boxsize : map.get(units)) {
+            		if(truckSize - boxsize >= 0) {
+                        truckSize -= boxsize;
+                        max += boxsize * units;
+                    } else {
+                        max += truckSize * units;
+                        truckSize = 0;
+                        break;
+                    }
+            	}
+        	}
+
+        }
+
+        return max;
+    }
+}

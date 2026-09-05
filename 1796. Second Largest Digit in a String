@@ -1,0 +1,22 @@
+class Solution {
+    public int secondHighest(String s) {
+        int first = -1, second = -1, prev = -1;
+
+        for(int i=0; i<s.length(); i++) {
+            if(s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                int d = s.charAt(i) - '0';
+                if(first < d) {
+                    prev = first;
+                    first = d;
+
+                    if(second < prev) 
+                        second = prev;
+                } else {
+                    if(first != -1 && first != d && second < d) 
+                        second = d;
+                }
+            }
+        }
+        return second;
+    }
+}

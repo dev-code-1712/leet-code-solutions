@@ -1,0 +1,27 @@
+class Solution {
+    String asciibinary(char c) {
+        int d = (int)c, count = 0;
+        String str = "";
+        while(d > 0) {
+            str = (d%2)+str;
+            d /= 2;
+            count ++;
+        }
+        for(int i=0; i< 8-count; i++)
+            str = "0"+str;
+
+        return str;
+
+    }
+    public boolean isPalindromic(String s) {
+        StringBuilder ascii = new StringBuilder();
+        for(char ch:s.toCharArray()) {
+            ascii.append(asciibinary(ch));
+        }
+        String asciistr = ascii.toString();
+        if(asciistr.equals(ascii.reverse().toString()))
+            return true;
+        else
+            return false;
+    }
+}
