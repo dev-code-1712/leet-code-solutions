@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
+        List<Integer> result = new ArrayList();
+        List<Integer> matchkeys = new ArrayList();
+
+        for(int i=0; i<nums.length; i++) {
+            if(key == nums[i])
+                matchkeys.add(i);
+        }
+
+        for(int i=0; i<nums.length; i++) {
+            for(int loc :matchkeys) {
+                if(Math.abs(i - loc) <= k) {
+                    result.add(i);
+                    break;
+                }
+                    
+            }
+        }
+        return result;
+    }
+}
