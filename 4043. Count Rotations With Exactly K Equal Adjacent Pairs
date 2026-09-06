@@ -1,0 +1,23 @@
+class Solution {
+    int countAdjacentCharsSame(String s) {
+        int count = 0;
+        for(int i=0; i<s.length()-1; i++) {
+            if(s.charAt(i) == s.charAt(i+1))
+                count ++;
+        }
+        return count;
+    }
+    public int countRotations(String s, int k) {
+        int count = 0, len = s.length();
+        for(int i=0; i<len; i++) {
+            int total = countAdjacentCharsSame(s);
+            if(total == k) 
+                count ++;
+
+            //System.out.println(s +" "+total);
+            s = s.substring(1)+s.charAt(0);
+        }
+
+        return count;
+    }
+}
