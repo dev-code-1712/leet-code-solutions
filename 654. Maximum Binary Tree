@@ -1,0 +1,66 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int findmax(int[] nums, int start, int end) {
+        int max = -1, loc = -1;
+        for(int i=start; i<=end; i++) {
+            if(nums[i] > max) {
+                max = nums[i];
+                loc = i;
+            }
+        }
+        return loc;
+    }
+
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        if(nums.length == 1)
+            return new TreeNode(nums[0]);
+        
+        int loc = findmax(nums, 0, nums.length-1);
+        TreeNode root = new TreeNode(nums[loc]);
+
+        buildtree(nums, root, 0, loc-1, true);
+        buildtree(nums, root, loc+1, nums.length-1, false);
+
+        return root;
+    }
+
+    void buildtree(int[] nums, TreeNode pnode, int start, int end, boolean isleft) {
+
+        if(start > end)
+            return;
+        
+        if(start == end) {
+            TreeNode node = new TreeNode(nums[start]);
+            if(isleft) {
+                pnode.left = node;
+            } else {
+                pnode.right = node;
+            }
+        } else {
+            int loc = findmax(nums, start, end);
+            TreeNode node = new TreeNode(nums[loc]);
+            if(isleft) {
+                pnode.left = node;
+            } else {
+                pnode.right = node;
+            }
+            buildtree(nums, node, start, loc-1, true);
+            buildtree(nums, node, loc+1, end, false);
+        }
+
+    }
+}
