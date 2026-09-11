@@ -1,0 +1,32 @@
+class Solution {
+    public int largestInteger(int n, int s) {
+        if(s == 0)
+            return 0;
+        
+        int max = 0; 
+        if(n<2) {
+            max = 9;
+        } else if(n>=2 && n<3) {
+            max = 99;
+        } else if(n>=3 && n<4) {
+            max = 999;
+        } else if(n>=4 && n<5) {
+            max = 9999;
+        } else if(n>=5 && n<6) {
+            max = 99999;
+        } else 
+            return -1;
+        
+        for(int i=max; i >= 0; i--) {
+            int sum = 0, temp = i;
+            while(temp > 0) {
+                sum += temp%10;
+                temp /= 10;
+            }
+            if(sum == s)
+                return i;
+        }
+
+        return -1;
+    }
+}

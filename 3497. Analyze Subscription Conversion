@@ -1,0 +1,20 @@
+# Write your MySQL query statement below
+
+select a.user_id, 
+        round(sum(COALESCE(a.trial_avg_duration,0)), 2) as trial_avg_duration,
+        round(sum(COALESCE(a.paid_avg_duration,0)), 2) as paid_avg_duration
+from (
+    select user_id, 
+            case 
+                when activity_type = 'free_trial' then avg(activity_duration) 
+            end as trial_avg_duration,
+            case 
+                when activity_type = 'paid' then avg(activity_duration)
+            end as paid_avg_duration
+
+    from UserActivity
+    where activity_type in ('free_trial', 'paid')
+    group by user_id, activity_type
+) a
+group by a.user_id
+having count(*)>1

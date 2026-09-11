@@ -1,0 +1,43 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        
+        Map<Integer, Integer> map = new LinkedHashMap();
+        for(int i=0; i<nums.length; i++) {
+            if(map.containsKey(nums[i])) 
+                map.put(nums[i], map.get(nums[i]) + 1);
+            else 
+                map.put(nums[i], 1);
+        }
+
+        Map<Integer, List<Integer>> rmap = new HashMap();
+        for(int key : map.keySet()) {
+            List<Integer> list = null;
+            int val = map.get(key);
+            if(rmap.containsKey(val)) {
+                list = rmap.get(val);
+                list.add(key);
+            } else {
+                list = new ArrayList();
+                list.add(key);
+                rmap.put(val, list);
+            }
+        }
+
+        Set<Integer> set = new TreeSet(Comparator.reverseOrder());
+        set.addAll(rmap.keySet());
+
+        int[] result = new int[k];
+        int i=0;
+        for(int val: set) {
+            for(int key: rmap.get(val)) {
+                if(i >= k)
+                    break;
+                
+                result[i++] = key;
+            }
+            if(i >= k)
+                break;
+        }
+        return result;
+    }
+}

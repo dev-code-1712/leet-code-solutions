@@ -1,0 +1,33 @@
+class Solution {
+    public int mostFrequentEven(int[] nums) {
+        Map<Integer, Integer> map = new LinkedHashMap();
+        int max = -1, key = -1;
+
+        for(int i=0; i<nums.length; i++) {
+            if(nums[i] % 2 != 0)
+                continue;
+            
+            if(map.containsKey(nums[i])) 
+                map.put(nums[i], map.get(nums[i]) + 1);
+            else 
+                map.put(nums[i], 1);
+
+            if(max == -1 && key == -1) {
+                max = map.get(nums[i]);
+                key = nums[i];
+
+            } else if(map.get(nums[i]) >= max) {
+                if(max == map.get(nums[i])) {
+                    if(key > nums[i])
+                        key = nums[i];
+                } else {
+                    max = map.get(nums[i]); 
+                    key = nums[i];
+                }
+
+            }
+        }
+
+        return key;
+    }
+}

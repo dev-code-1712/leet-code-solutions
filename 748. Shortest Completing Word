@@ -1,0 +1,36 @@
+class Solution {
+    List<Character> getList(String word) {
+       List<Character> list = new ArrayList();
+        for(int i=0; i<word.length(); i++) {
+            if(word.charAt(i) >= 'a' && word.charAt(i) <= 'z') 
+                list.add(word.charAt(i)); 
+            else if (word.charAt(i) >= 'A' && word.charAt(i) <= 'Z')
+                list.add((char)(word.charAt(i)+32));        
+        }
+
+       return list; 
+    }
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        List<Character> license = getList(licensePlate);
+	        String result = null;
+	        for(String word : words) {
+	            List<Character> wlist = getList(word);
+
+	            if(license.size() <= wlist.size()) {
+	                int i=0;
+	                while(i < license.size()) {
+	                   int loc = wlist.indexOf(license.get(i));
+	                   if(loc == -1)
+	                	   break;
+	                    wlist.remove(loc);
+	                    i++;
+	                }
+	                
+	                if(i == license.size() && (result == null || result.length() > word.length()))
+	                    result = word;
+	            }
+	            
+	        }
+	        return result;
+    }
+}

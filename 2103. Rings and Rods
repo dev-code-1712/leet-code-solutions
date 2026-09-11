@@ -1,0 +1,28 @@
+class Solution {
+    public int countPoints(String rings) {
+        Map<Integer, Set<Character>> map = new HashMap();
+        for(int i=0; i<rings.length(); i+=2) {
+            int rod = rings.charAt(i+1)-'0';
+            char ch = rings.charAt(i);
+            Set<Character> set = null;
+
+            if(map.containsKey(rod)) {
+                set = map.get(rod);
+                set.add(ch);
+            } else {
+                set = new HashSet();
+                set.add(ch);
+                map.put(rod, set);
+            }
+        }
+        //System.out.println(map);
+
+        int count = 0;
+        for(int val:map.keySet()) {
+            if(map.get(val).size() == 3)
+                count ++;
+        }
+
+        return count;
+    }
+}

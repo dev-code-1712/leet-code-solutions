@@ -1,0 +1,23 @@
+import java.math.BigInteger;
+class Solution {
+    public int xorAfterQueries(int[] nums, int[][] queries) {
+        for(int i=0; i<queries.length; i++) {
+            int idx = queries[i][0];
+            while(idx <= queries[i][1]) {
+                BigInteger bi = BigInteger.valueOf(nums[idx]);
+                bi = bi.multiply(BigInteger.valueOf(queries[i][3]));
+
+                nums[idx] = (int) (bi.longValue() % 1000000007);
+                idx += queries[i][2];
+            }
+        }
+        
+
+        int xorsum = 0;
+        for(int val : nums) {
+            xorsum ^= val;
+        }
+
+        return xorsum;
+    }
+}
