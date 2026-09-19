@@ -1,0 +1,20 @@
+class Solution {
+    public int minAddToMakeValid(String s) {
+        Stack<Character> stack = new Stack();
+        int i=0, miss = 0;
+        while(i<s.length()) {
+            if(s.charAt(i) == '(')
+                stack.push('(');
+            else if(s.charAt(i) == ')') {
+                if(!stack.isEmpty()) 
+                    stack.pop();
+                else
+                    miss ++;
+            }
+
+            i ++;
+        }
+        miss += stack.size();
+        return miss;
+    }
+}
