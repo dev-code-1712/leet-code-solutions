@@ -1,0 +1,21 @@
+class Solution {
+    Stack<Character> getStack(String word) {
+        Stack<Character> stack = new Stack();
+        for(char ch : word.toCharArray()) {
+            if(ch == '#') {
+                if(!stack.isEmpty())
+                    stack.pop();
+            } else {
+                stack.push(ch);
+            }
+        }
+
+        return stack;
+    }
+    public boolean backspaceCompare(String s, String t) {
+        Stack<Character> stack = getStack(s);
+        Stack<Character> stack2 = getStack(t);
+        
+        return stack.equals(stack2);
+    }
+}

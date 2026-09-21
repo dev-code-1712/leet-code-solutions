@@ -1,0 +1,33 @@
+class Solution {
+    public int countSpecialIntegers(int[] nums) {
+        Map<Integer, List<Integer>> map = new HashMap();
+
+        for(int i=0; i<nums.length; i++) {
+            if(map.containsKey(nums[i])) {
+                map.get(nums[i]).add(i);
+            } else {
+                List<Integer> list = new ArrayList();
+                list.add(i);
+                map.put(nums[i], list);
+            }
+        }
+
+        //System.out.println(map);
+
+        int count = 0;
+        for(int num : map.keySet()) {
+            boolean flag = true;
+            List<Integer> list = map.get(num);
+            for(int i=0; i < list.size()-1; i++) {
+                if(list.get(i+1) - list.get(i) != 1) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) 
+                count ++;
+        }
+
+        return count;
+    }
+}
