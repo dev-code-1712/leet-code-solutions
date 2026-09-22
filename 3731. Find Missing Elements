@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> findMissingElements(int[] nums) {
+        int min = 101, max = 0;
+        List<Integer> list = new ArrayList();
+        for(int val : nums) {
+            list.add(val);
+            if(min > val)
+                min = val;
+            if(max < val)
+                max = val;
+        }
+
+        List<Integer> result = new ArrayList();
+        for(int i=min; i<=max; i++) {
+            if(!list.contains(i))
+                result.add(i);
+        }
+
+        return result;
+    }
+}
