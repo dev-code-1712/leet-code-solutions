@@ -1,0 +1,10 @@
+class Solution {
+    public int evenNumberBitwiseORs(int[] nums) {
+        int bor = 0;
+        for(int val : nums) {
+            if(val % 2 == 0) 
+                bor = bor | val;
+        }
+        return bor;
+    }
+}
