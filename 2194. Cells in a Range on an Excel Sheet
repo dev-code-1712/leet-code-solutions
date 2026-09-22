@@ -1,0 +1,18 @@
+class Solution {
+    public List<String> cellsInRange(String s) {
+        int sl = s.charAt(0) - 'A';
+        int sn = s.charAt(1) - '0';
+
+        int el = s.charAt(3) - 'A';
+        int en = s.charAt(4) - '0';
+        List<String> list = new ArrayList();
+
+        for(int i=sl; i<=el; i++) {
+            for(int j=sn; j<=en; j++) {
+                String str = (char)(i+65)+""+j;
+                list.add(str);
+            }
+        }
+        return list;
+    }
+}
