@@ -1,0 +1,28 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        List<Character> list = new ArrayList();
+        for(char ch:text.toCharArray()) 
+            list.add(ch);
+        boolean flag = false;
+
+        int count = 0;
+        do {
+
+            flag = false;
+            boolean loc = list.remove(Character.valueOf('b'));
+            boolean loc2 = list.remove(Character.valueOf('a'));
+            boolean loc3 = list.remove(Character.valueOf('l'));
+            boolean loc4 = list.remove(Character.valueOf('l'));
+            boolean loc5 = list.remove(Character.valueOf('o'));
+            boolean loc6 = list.remove(Character.valueOf('o'));
+            boolean loc7 = list.remove(Character.valueOf('n'));
+
+            if(loc && loc2 && loc3 && loc4 && loc5 && loc6 && loc7) {
+                flag = true;
+                count ++;
+            }
+        } while(flag);
+
+        return count;
+    }
+}
