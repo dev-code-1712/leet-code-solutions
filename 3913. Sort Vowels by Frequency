@@ -1,0 +1,66 @@
+class Solution {
+    public String sortVowels(String s) {
+        Map<Character, Integer> map = new LinkedHashMap();
+        for(char ch:s.toCharArray()) {
+            switch(ch) {
+                case 'a' : case 'e' : case 'i' : case 'o' : case 'u' : 
+                		map.put(ch, map.getOrDefault(ch, 0) + 1); 
+                		break;
+                default: break;
+            }
+        }
+        if(map.size() <= 1)
+            return s;
+
+        int[][] chars2 = new int[5][2];
+        int x=0;
+        for(char ch:map.keySet()) {
+            int max = 0;
+            char vowel = '\0';
+            for(char ch2 : map.keySet()) {
+                if(max < map.get(ch2)) {
+                    max = map.get(ch2);
+                    vowel = ch2;
+                }
+            }
+            if(vowel != '\0') {
+            	map.put(vowel, 0);
+            	chars2[x][0] = max;
+            	switch(vowel) {
+            		case 'a': chars2[x][1] = 'a' - 97; break;
+            		case 'e': chars2[x][1] = 'e' - 97; break;
+            		case 'i': chars2[x][1] = 'i' - 97; break;
+            		case 'o': chars2[x][1] = 'o' - 97; break;
+            		case 'u': chars2[x][1] = 'u' - 97; break;
+            	}
+            }
+            x++;
+        }
+
+        char[] letters = s.toCharArray();
+        for(int i=0; i<letters.length; i++) {
+            if(letters[i] == 'a' || letters[i] == 'e' || letters[i] == 'i' || 
+                    letters[i] == 'o' || letters[i] == 'u') {
+                
+                if(chars2[0][0] > 0) {
+                    letters[i] = (char)(chars2[0][1] + 'a');
+                    chars2[0][0] --;
+                } else if(chars2[1][0] > 0) {
+                    letters[i] = (char)(chars2[1][1] + 'a');
+                    chars2[1][0] --;
+                } else if(chars2[2][0] > 0) {
+                    letters[i] = (char)(chars2[2][1] + 'a');
+                    chars2[2][0] --;
+                } else if(chars2[3][0] > 0) {
+                    letters[i] = (char)(chars2[3][1] + 'a');
+                    chars2[3][0] --;
+                } else if(chars2[4][0] > 0) {
+                    letters[i] = (char)(chars2[4][1] + 'a');
+                    chars2[4][0] --;
+                }
+            }
+        }
+        String str = String.valueOf(letters);
+        return str;
+    }
+}
