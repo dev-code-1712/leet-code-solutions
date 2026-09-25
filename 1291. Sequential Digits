@@ -1,0 +1,27 @@
+class Solution {
+    public List<Integer> sequentialDigits(int low, int high) {
+        List<Integer> list = new ArrayList();
+
+        int min = String.valueOf(low).length();
+        int max = String.valueOf(high).length();
+        
+        int start = String.valueOf(low).charAt(0) - '0';
+        for(int i=min; i<=max; i++) {
+            for(int j=1; j <= 10-i; j++) {
+                int num = j;
+                int count = num+1;
+                for(int k=2; k<=i; k++) {
+                    num = num*10 + count;
+                    count ++;
+                }
+                
+                if(num > high)
+                    break;
+                if(num >= low && num <=high)
+                	list.add(num);
+            }
+        }
+        //System.out.println(list);
+        return list;
+    }
+}
