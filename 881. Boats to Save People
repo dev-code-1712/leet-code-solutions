@@ -1,0 +1,27 @@
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        int boats = 0, lp = limit;
+        Arrays.sort(people);
+        int low = 0, high = people.length-1;
+        
+        while(low <= high) {
+            lp -= people[high --];
+            if(lp == 0) {
+                boats ++;
+                lp = limit;
+            } else if(lp > 0) {
+                if(low <= high) {
+                	if(lp - people[low] >= 0)
+                		low ++;
+                    boats ++;
+                    lp = limit;
+                } else {
+                	boats ++;
+                    lp = limit;
+                }
+            }
+        }
+        //System.out.println(boats);
+        return boats;
+    }
+}
