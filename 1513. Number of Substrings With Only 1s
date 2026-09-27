@@ -1,0 +1,33 @@
+class Solution {
+    public int numSub(String s) {
+        if(!s.contains("1"))
+            return 0;
+        
+        long sum = 0;
+        int i=0; 
+        while(i<s.length()) {
+            if(s.charAt(i) == '1') {
+                int j=i+1, len = 0;
+                while(j<s.length()) {
+                    if(s.charAt(j) != '1') {
+                        len = j-i;
+                        i = j;
+                        break;
+                    }
+                    j++;
+                }
+                if(j == s.length()) {
+                	len = j-i;
+                    i = j;
+                }
+
+                sum += (len *(len+1L)) / 2;
+
+            } else {
+                i++;
+            }
+        }
+        sum = sum % (1000000007L);
+        return (int)sum;
+    }
+}
