@@ -1,0 +1,13 @@
+class Solution {
+    public String shiftingLetters(String s, int[] shifts) {
+        char[] letters = s.toCharArray();
+        long sum = 0;
+        for(int i=shifts.length-1; i>=0; i--) {
+            sum += shifts[i];
+            int pos = (int)((sum + letters[i] - 'a') % 26);
+            letters[i] = (char)(pos + 'a');
+        }
+
+        return String.valueOf(letters);
+    }
+}
