@@ -1,0 +1,27 @@
+class Solution {
+    int vowelCount(String word) {
+        int count = 0;
+        for(int i=0; i<word.length(); i++) {
+            if(word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'i' || 
+                word.charAt(i) == 'o' || word.charAt(i) == 'u')
+            
+            count ++;
+        }
+
+        return count;
+    }
+    public String reverseWords(String s) {
+        String[] words = s.split(" ");
+        StringBuilder builder = new StringBuilder();
+        int count = vowelCount(words[0]);
+        builder.append(words[0]);
+        for(int i=1; i<words.length; i++) {
+            builder.append(" ");
+            if(vowelCount(words[i]) == count)
+                builder.append(new StringBuilder(words[i]).reverse());
+            else
+                builder.append(words[i]);
+        }
+        return builder.toString();
+    }
+}

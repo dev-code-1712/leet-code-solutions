@@ -1,0 +1,30 @@
+class Solution {
+    public List<String> printVertically(String s) {
+        List<String> list = new ArrayList();
+        String words[] = s.split(" ");
+        int len = 0;
+        for(String word : words) {
+            if(len < word.length())
+                len = word.length();
+        }
+        for(int i=0; i<len; i++) {
+            String temp = "";
+            for(int j=0; j<words.length; j++) {
+                if( i < words[j].length()) {
+                    temp += words[j].charAt(i);
+                } else {
+                    temp += " ";
+                }
+            }
+            int len2 = words.length;
+            while(len > 0) {
+                if(temp.charAt(len2 - 1) != ' ')
+                    break;
+                len2 --;
+            }
+            list.add(temp.substring(0, len2));
+        }
+
+        return list;
+    }
+}
