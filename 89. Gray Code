@@ -1,0 +1,30 @@
+class Solution {
+    public List<Integer> grayCode(int n) {
+        List<String> oldlist = new ArrayList();
+        List<String> newlist = new ArrayList();
+        for(int i=1; i<=n; i++) {
+            for(int j=0; j<=1; j++) {
+                if(oldlist.size() == 0) {
+                    newlist.add(""+j);
+                } else {
+                    int len = oldlist.size();
+                    for(int k=0; k<len; k++) {
+                        if(j == 0) 
+                            newlist.add(j+oldlist.get(k)); 
+                        else 
+                            newlist.add(j+oldlist.get(len - k - 1));
+                    } 
+                }
+            }
+            oldlist.clear();
+            oldlist.addAll(newlist);
+            newlist.clear();
+        }
+
+        List<Integer> result = new ArrayList();
+        for(String str : oldlist)
+            result.add(Integer.parseInt(str, 2));
+        
+        return result;
+    }
+}

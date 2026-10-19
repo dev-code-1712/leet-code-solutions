@@ -1,0 +1,33 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        int rows=n, cols=n;
+        int top=0, bottom=rows, left=0, right=cols;
+        int count = 1;
+        while(top < bottom && left < right) {
+
+            for(int i=left; i<right; i++) {
+                result[top][i] = count++;
+            }
+            top++;
+               
+            for(int i=top; i<bottom; i++) {
+                result[i][right-1] = count++;
+            }
+            right --;
+               
+            for(int i=right; top < bottom && i>left; i--) {
+                result[bottom-1][i-1] = count++;
+            }
+            bottom --;
+                
+            for(int i=bottom; left < right && i>top; i--) {
+                result[i-1][left] = count++;
+            }
+            left ++;
+    
+        }
+        
+        return result;
+    }
+}
