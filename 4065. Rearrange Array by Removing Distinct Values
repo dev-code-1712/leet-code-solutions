@@ -1,0 +1,25 @@
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        Map<Integer, Integer> map = new TreeMap();
+        for(int val : nums) {
+            map.put(val, map.getOrDefault(val, 0) + 1);
+        }
+        System.out.println(map);
+        int result[] = new int[nums.length];
+        int i=0;
+        while(true) {
+            boolean flag = false;
+            for(int key2:map.keySet()) {
+                int val = map.get(key2);
+                if(val != 0) {
+                    flag = true;
+                    result[i++] = key2;
+                    map.put(key2, val-1);
+                }
+            }
+            if(!flag)
+                break;
+        }
+        return result;
+    }
+}
