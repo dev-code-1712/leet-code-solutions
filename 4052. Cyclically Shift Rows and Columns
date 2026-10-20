@@ -1,0 +1,39 @@
+class Solution {
+    void leftshift(int[][] grid, int row, int times) {
+        for(int i=0; i<times; i++) {
+            int t = grid[row][0];
+
+            for(int j=0;j<grid[row].length-1; j++)
+                grid[row][j] = grid[row][j+1];
+
+            grid[row][grid[row].length - 1] = t;
+        }
+    }
+
+    void upshift(int[][] grid, int col, int times) {
+        for(int i=0; i<times; i++) {
+            int t = grid[0][col];
+
+            for(int j=0; j<grid[col].length-1; j++)
+                grid[j][col] = grid[j+1][col];
+
+            grid[grid[col].length - 1][col] = t;
+        }
+    }
+
+    public int[][] cyclicShift(int n, int[][] grid, int[] rowShift, int[] colShift) {
+        for(int i=0; i<rowShift.length; i++) {
+            if(rowShift[i] != 0) {
+                leftshift(grid, i, rowShift[i]);
+            }
+        }
+
+        for(int i=0; i<colShift.length; i++) {
+            if(colShift[i] != 0) {
+                upshift(grid, i, colShift[i]);
+            }
+        }
+
+        return grid;
+    }
+}
