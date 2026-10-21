@@ -1,0 +1,21 @@
+class Solution {
+    public boolean consecutiveSetBits(int n) {
+        boolean flag = false;
+        int prev = -1, curr = -1;
+        int count = 0;
+        while(n > 0) {
+            if(!flag) {
+                prev = n % 2;
+                flag = true;
+            } else {
+                curr = n % 2;
+                if(prev == 1 && curr == 1)
+                    count ++;
+                prev = curr;
+            }
+            n /= 2;
+        }
+
+        return count == 1 ? true : false;
+    }
+}
