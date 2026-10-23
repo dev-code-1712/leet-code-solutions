@@ -1,0 +1,12 @@
+class Solution {
+    public int countMonobit(int n) {
+        int val = 1, valc = 0, count = 0;
+        do {
+            count ++;
+            val = val * 2;
+            valc = val - 1;
+        } while(valc <= n);
+
+        return count;
+    }
+}
