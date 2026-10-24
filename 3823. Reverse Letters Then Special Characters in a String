@@ -1,0 +1,25 @@
+class Solution {
+    public String reverseByType(String s) {
+        StringBuilder letters = new StringBuilder();
+        StringBuilder symbols = new StringBuilder();
+        for(char ch : s.toCharArray()) {
+            if(ch >= 'a' && ch <= 'z')
+                letters.append(ch);
+            else
+                symbols.append(ch);
+        }
+        String r = letters.reverse().toString();
+        String s2 = symbols.reverse().toString();
+
+        StringBuilder result = new StringBuilder();
+        int x = 0, y = 0;
+        for(int i=0; i<s.length(); i++) {
+            char ch = s.charAt(i);
+            if(ch >= 'a' && ch <= 'z')
+                result.append(r.charAt(x++));
+            else
+                result.append(s2.charAt(y++));
+        }
+        return result.toString();
+    }
+}
