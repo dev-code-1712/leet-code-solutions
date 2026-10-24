@@ -1,0 +1,90 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder builder = new StringBuilder();
+        preorder(root, builder);
+        return builder.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if(data.length() == 0)
+            return null;
+        
+        TreeNode node = null;
+        int pos = 0;
+        do {
+            String bstr = data.substring(pos, pos+15);
+            Integer val = Integer.parseInt(bstr, 2);
+
+            node = bulidBST(node, val);
+
+            pos += 15;
+        } while(pos < data.length());
+
+        return node;
+    }
+
+    void preorder(TreeNode node, StringBuilder builder) {
+        if(node != null) {
+            
+            String str = Integer.toBinaryString(node.val);
+            str = padding(str, 15);
+            System.out.println(str);
+            builder.append(str);
+
+            preorder(node.left, builder);
+            preorder(node.right, builder);
+        }
+    }
+    String padding(String str, int size) {
+        StringBuilder builder = new StringBuilder();
+        for(int i=0; i<size-str.length(); i++)
+            builder.append("0");
+        
+        builder.append(str);
+        return builder.toString();
+    }
+
+    TreeNode bulidBST(TreeNode node, int val) {
+        if(node == null)
+            node = new TreeNode(val);
+        else {
+            TreeNode tnode = node;
+            while(true) {
+                if(val < tnode.val) {
+                    if(tnode.left == null) {
+                        tnode.left = new TreeNode(val);
+                        break;
+                    } else
+                        tnode = tnode.left;
+                } else {
+                    if(tnode.right == null) {
+                        tnode.right = new TreeNode(val);
+                        break;
+                    } else
+                        tnode = tnode.right;
+                }
+            }
+        }
+        
+        return node;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// String tree = ser.serialize(root);
+// TreeNode ans = deser.deserialize(tree);
+// return ans;
