@@ -1,0 +1,26 @@
+class Solution {
+    public int firstUniqueEven(int[] nums) {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for(int i=0; i<nums.length; i++) {
+            if(nums[i] % 2 == 0) {
+                if(map.get(nums[i]) == null) {
+                    List<Integer> list = new ArrayList();
+                    list.add(i);
+                    map.put(nums[i], list);
+                } else {
+                    map.get(nums[i]).add(i);
+                }
+            }
+        }
+
+        int min = 100, minval = -1;
+        for(int val : map.keySet()) {
+            if(map.get(val).size() == 1 && min > map.get(val).get(0)) {
+                    min = map.get(val).get(0);
+                    minval = val;
+            }
+        }
+
+        return minval;
+    }
+}
