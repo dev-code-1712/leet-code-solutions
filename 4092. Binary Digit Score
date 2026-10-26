@@ -1,0 +1,16 @@
+class Solution {
+    public int calculateScore(int a, int b) {
+        int s1 = count1s(a);
+        int s2 = count1s(b);
+        return (s1 >= s2) ? (s1 * s2) : (s2/s1);
+    }
+    int count1s(int x) {
+        int count = 0;
+        while(x>0) {
+            if(x%2 == 1)
+                count ++;
+            x /= 2;
+        }
+        return count;
+    }
+}
