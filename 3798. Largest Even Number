@@ -1,0 +1,6 @@
+class Solution {
+    public String largestEven(String s) {
+        int pos = s.lastIndexOf("2");
+        return pos != -1 ? s.substring(0, pos+1) : "";
+    }
+}
