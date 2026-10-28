@@ -1,1 +1,15 @@
-
+class Solution {
+    public int findComplement(int num) {
+        
+        String s = "";
+        while(num > 0) {
+            if( (num & 1) == 1)
+                s = "0"+s;
+            else 
+                s = "1"+s;
+            num >>= 1;
+        }
+        //System.out.println(s);
+        return Integer.valueOf(s, 2);
+    }
+}
