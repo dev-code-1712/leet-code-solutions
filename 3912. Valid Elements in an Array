@@ -1,0 +1,42 @@
+class Solution {
+    public List<Integer> findValidElements(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        int[] pos = new int[100];
+
+        for(int i=1; i<nums.length; i++) {
+            boolean flag = true;
+            for(int j=0; j<i; j++) {
+                if(nums[i] <= nums[j]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+                pos[i] = 1;
+            }
+        }
+        
+        for(int i=nums.length-2; i>=0; i--) {
+            boolean flag = true;
+            for(int j=i+1; j<=nums.length-1; j++) {
+                if(nums[i] <= nums[j]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+                pos[i] = 1;
+            }
+        }
+
+        pos[0] = 1;
+        pos[nums.length-1] = 1;
+        for(int i=0; i<100; i++) {
+            if(pos[i] == 1) {
+                list.add(nums[i]);
+            }
+        }
+        
+        return list;
+    }
+}
