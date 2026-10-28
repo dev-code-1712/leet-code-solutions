@@ -1,0 +1,10 @@
+class Solution {
+    public int sumOfGoodIntegers(int n, int k) {
+        int r = n+k, sum = 0;
+        for(int i=1; i<=r; i++) {
+            if(Math.abs(n-i) <= k && (n & i) == 0)
+                sum += i;
+        }
+        return sum;
+    }
+}
