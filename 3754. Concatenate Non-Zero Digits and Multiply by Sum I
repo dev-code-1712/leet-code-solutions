@@ -1,0 +1,17 @@
+class Solution {
+    public long sumAndMultiply(int n) {
+        int sum = 0;
+        long value = 0, tens = 1;
+        while(n > 0) {
+            int d = n % 10;
+            if(d > 0) {
+                value = d * tens + value;
+                sum += d;
+                tens *= 10;
+            }
+            n /= 10;
+        }
+        value *= sum;
+        return value;
+    }
+}
