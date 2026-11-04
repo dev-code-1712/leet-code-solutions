@@ -1,0 +1,16 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        int num = 0;
+        String words[] = s.split("\\s+");
+        for(String word : words) {
+            if(word.charAt(0) >= '0' && word.charAt(0) <= '9') {
+                int val = Integer.valueOf(word);
+                if(num < val)
+                    num = val;
+                else
+                    return false;
+            }
+        }
+        return true;
+    }
+}

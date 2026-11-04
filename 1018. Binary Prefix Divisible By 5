@@ -1,0 +1,15 @@
+import java.math.BigInteger;
+class Solution {
+    public List<Boolean> prefixesDivBy5(int[] nums) {
+        List<Boolean> list = new ArrayList<>();
+        BigInteger val = BigInteger.ZERO;
+        for(int i=0; i<nums.length; i++) {
+        	val = val.multiply(BigInteger.valueOf(2L)).add(BigInteger.valueOf(nums[i]));
+            if(val.mod(BigInteger.valueOf(5)) == BigInteger.ZERO)
+                list.add(Boolean.TRUE);
+            else
+                list.add(Boolean.FALSE);
+        }
+        return list;
+    }
+}
