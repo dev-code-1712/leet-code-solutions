@@ -1,0 +1,11 @@
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int val : candyType) {
+            map.put(val, map.getOrDefault(val, 0) + 1);
+        }
+        return map.keySet().size() >= (candyType.length / 2) ? 
+                candyType.length / 2 :
+                map.keySet().size();
+    }
+}
