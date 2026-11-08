@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        int[] parents = new int[]{-1, -1};
+        int[] depths = new int[]{-1, -1};
+        findParents(root, x, y, parents, depths, 0);
+
+        return depths[0] == depths[1] && parents[0] != parents[1];
+    }
+
+    void findParents(TreeNode node, int x, int y, int[] parents, int[] depths, int depth) {
+        if(node != null) {
+            if(node.left != null && (node.left.val == x || node.left.val == y)) {
+                if(depths[0] == -1) {
+                    depths[0] = depth;
+                    parents[0] = node.val;
+                } else {
+                    depths[1] = depth;
+                    parents[1] = node.val;
+                }
+            }
+            if(node.right != null && (node.right.val == x || node.right.val == y)) {
+                if(depths[0] == -1) {
+                    depths[0] = depth;
+                    parents[0] = node.val;
+                } else {
+                    depths[1] = depth;
+                    parents[1] = node.val;
+                }
+            }
+
+           findParents(node.left, x, y, parents, depths, depth+1); 
+           findParents(node.right, x, y, parents, depths, depth+1); 
+        }
+    }
+}

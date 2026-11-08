@@ -1,0 +1,31 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        Set<Integer> set = new LinkedHashSet<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map2 = new TreeMap<>();
+        int[] result = new int[arr1.length];
+
+        for(int val : arr2)
+            set.add(val);
+
+        for(int val : arr1) {
+            if(set.contains(val))
+                map.put(val, map.getOrDefault(val, 0) + 1);
+            else
+                map2.put(val, map2.getOrDefault(val, 0) + 1);
+        }
+
+        int pos = 0;
+        for(int val : arr2) {
+            for(int i=1; i<=map.get(val); i++) 
+                result[pos++] = val;
+        }
+
+        for(int val : map2.keySet()) {
+            for(int i=1; i<=map2.get(val); i++) 
+                result[pos++] = val;
+        }
+
+        return result;
+    }
+}
