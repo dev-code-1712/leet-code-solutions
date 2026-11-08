@@ -1,0 +1,32 @@
+class Solution {
+    public String reformatDate(String date) {
+        
+        String words[] = date.split("\\s+");
+
+        String dd = "";
+        if(words[0].length() < 4) {
+            dd = "0"+words[0].charAt(0);
+        } else {
+            dd = words[0].charAt(0)+""+words[0].charAt(1);
+        }
+        
+        String mm = switch(words[1]) {
+                    case "Jan" -> "01" ; 
+                    case "Feb" -> "02" ; 
+                    case "Mar" -> "03" ; 
+                    case "Apr" -> "04" ; 
+                    case "May" -> "05" ; 
+                    case "Jun" -> "06" ; 
+                    case "Jul" -> "07" ; 
+                    case "Aug" -> "08" ; 
+                    case "Sep" -> "09" ; 
+                    case "Oct" -> "10" ; 
+                    case "Nov" -> "11" ; 
+                    default -> "12" ; 
+        };
+
+        String yyyy = words[2];
+
+        return yyyy+"-"+mm+"-"+dd;
+    }
+}
