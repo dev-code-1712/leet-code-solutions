@@ -1,0 +1,20 @@
+class Solution {
+    public int countConsistent(int[] nums) {
+        int len = nums.length;
+        int count = 0;
+        for(int i=0; i<len; i++) {
+            for(int j=0; j<len-i; j++) {
+                int band = nums[j];
+                int min = 101;
+                for(int k=j; k<j+i+1; k++) {  
+                    if(min > nums[k])
+                        min = nums[k];
+                    band = band & nums[k];
+                }
+                if(band == min)
+                    count ++;
+            }
+        }
+        return count;
+    }
+}
