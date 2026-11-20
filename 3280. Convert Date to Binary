@@ -1,0 +1,16 @@
+class Solution {
+    public String convertDateToBinary(String date) {
+        String[] words = date.split("-");
+        return binary(words[0])+"-"+binary(words[1])+"-" +binary(words[2]);
+    }
+
+    String binary(String word) {
+        String result = "";
+        int val = Integer.valueOf(word);
+        while(val > 0) {
+            result = val%2 + result;
+            val /= 2;
+        }
+        return result;
+    }
+}
