@@ -1,0 +1,30 @@
+class KthLargest {
+    List<Integer> list = null;
+    int kval = -1;
+    public KthLargest(int k, int[] nums) {
+        kval = k;
+        list = new ArrayList<>();
+        for(int v:nums) {
+            list.add(v);
+        }
+        Collections.sort(list);
+    }
+    
+    public int add(int val) {
+            int i=list.size()-1;
+            while(i>=0) {
+                if(val > list.get(i))
+                    break;
+                i--;
+            }
+            list.add(i+1, val);
+
+        return list.get(list.size() - kval);
+    }
+}
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest obj = new KthLargest(k, nums);
+ * int param_1 = obj.add(val);
+ */
