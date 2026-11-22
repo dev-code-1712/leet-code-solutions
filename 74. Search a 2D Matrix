@@ -1,0 +1,41 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length, n = matrix[0].length;
+        int low = 0, high = m-1;
+        boolean flag = false;
+        int rmid = -1;
+
+        while(low <= high) {
+            rmid = (low + high)/2;
+            if(matrix[rmid][0] <= target && target <= matrix[rmid][n-1]) {
+                flag = true;
+                break;
+            } else if(target < matrix[rmid][0]) {
+                high = rmid-1;
+            } else {
+                low = rmid+1;
+            }
+        }
+        int cmid = -1;
+        if(flag) {
+        	low = 0;
+        	high = n-1;
+            flag = false;
+            
+            while(low <= high) {
+                cmid = (low + high)/2;
+                if(matrix[rmid][cmid] == target) {
+                    flag = true;
+                    break;
+                } else if(target < matrix[rmid][cmid]) {
+                    high = cmid-1;
+                } else {
+                    low = cmid+1;
+                }
+            }
+            if(flag)
+            	return true;
+        }
+        return false;
+    }
+}
