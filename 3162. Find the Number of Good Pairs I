@@ -1,0 +1,12 @@
+class Solution {
+    public int numberOfPairs(int[] nums1, int[] nums2, int k) {
+        int count = 0;
+        for(int val : nums1) {
+            for(int val2 : nums2) {
+                if(val % (val2 * k) == 0)
+                    count++;
+            }
+        } 
+        return count;   
+    }
+}
